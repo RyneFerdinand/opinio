@@ -11,8 +11,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;1,600;1,700&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <script>
         tailwind.config = {
             theme: {
@@ -41,7 +43,7 @@
             <img src="{{ asset('images/search-icon.svg') }}" alt="">
         </div>
         <nav>
-            <ul class="flex flex-row gap-10">
+            <ul class="flex flex-row items-center gap-10">
                 <li>
                     <a href="/" class="font-light hover:underline">Home</a>
                 </li>
@@ -49,15 +51,76 @@
                     <a href="/" class="font-light hover:underline">Create Article</a>
                 </li>
                 <li>
-                    <a href="/" class="font-light hover:underline">Login</a>
+                    {{-- <a href="/" class="font-light hover:underline">Login</a> --}}
+                    <!-- Button trigger modal -->
+                <button type="button"
+                class="font-light hover:underline"
+                data-bs-toggle="modal" data-bs-target="#login">
+                Login
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade fixed left-0 hidden w-[100vw] h-[100vh] overflow-x-hidden overflow-y-auto"
+                id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog relative w-auto pointer-events-none">
+                    <div class="modal-content pointer-events-auto bg-white rounded">
+                        <div class="modal-header flex flex-row items-center justify-between px-8 pt-8">
+                            <h1 class="font-bold text-4xl pt-5">Login</h1>
+                            <button type="button"
+                                class="text-5xl text-black"
+                                data-bs-dismiss="modal" aria-label="Close">X</button>
+                            </div>
+                            <div class="modal-body relative p-8 font-montserrat">
+                                <form class="flex flex-col">
+                                    <label class="font-bold mb-2">Email</label>
+                                    <input type="text" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
+                                    <label class="font-bold mb-2">Password</label>
+                                    <input type="password" id="password" name="password" placeholder="Password" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
+                                    <button type="button" class="px-5 py-3 bg-purple-600 font-bold text-white rounded" data-bs-dismiss="modal">LOGIN</button>
+                                </form>
+                                <p class="font-montserrat">Don't have an account? <a href="#register" class="text-highlight font-bold">Register</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </li>
                 <li>
-                    <a href="/"
-                        class="font-bold text-white bg-highlight px-6 py-3 rounded-md hover:bg-dark hover:text-highlight transition-all ease-in duration-75">Register</a>
+                    <button
+                        data-bs-toggle="modal" data-bs-target="#register" class="font-bold text-white bg-highlight px-6 py-3 rounded-md hover:bg-dark hover:text-highlight transition-all ease-in duration-75">Register
+                    </button>
+                    <div class="modal fade fixed top-[50px] left-0 hidden w-[100vw] h-[100vh] overflow-x-hidden overflow-y-auto"
+                    id="register" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog relative w-auto pointer-events-none">
+                        <div class="modal-content pointer-events-auto bg-white rounded">
+                            <div class="modal-header flex flex-row items-center justify-between px-8 pt-8">
+                                <h1 class="font-bold text-4xl pt-5">Register</h1>
+                                <button type="button"
+                                    class="text-5xl text-black"
+                                    data-bs-dismiss="modal" aria-label="Close">X</button>
+                                </div>
+                                <div class="modal-body relative p-8 font-montserrat">
+                                    <form class="flex flex-col">
+                                        <label class="font-bold mb-2">Name</label>
+                                        <input type="text" id="name" name="name" placeholder="Name" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
+                                        <label class="font-bold mb-2">Email</label>
+                                        <input type="text" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
+                                        <label class="font-bold mb-2">Password</label>
+                                        <input type="password" id="password" name="password" placeholder="Password" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
+                                        <button type="button" class="px-5 py-3 bg-purple-600 font-bold text-white rounded" data-bs-dismiss="modal">LOGIN</button>
+                                    </form>
+                                    <p class="font-montserrat">Already have an account? <a href="#login" class="text-highlight font-bold">Login</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </nav>
     </header>
+
+    @yield('content')
 
     <footer class="bg-dark text-white px-12 py-20 font-montserrat">
         <div class="grid grid-cols-4 gap-24 ">

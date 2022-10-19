@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view("components.home");
 });
+
+Route::get("/create-edit", function(){
+    return view('components.create-edit-article');
+});

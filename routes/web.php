@@ -24,3 +24,7 @@ Route::get("/create-edit", function(){
 Route::get('/article', function(){
     return view('components.article');
 });
+
+Route::get('/profile', function(){
+    return view('components.profile-page');
+});

@@ -51,7 +51,7 @@
         </div>
         <div class="flex flex-col px-20 mb-16">
             <h1 class="font-bold text-3xl mb-5">Related Articles</h1>
-            <div class="flex flex-row items-center justify-between">
+            <div class="grid grid-cols-3 gap-10">
                 <div class="relative w-[28vw] h-[40vh] bg-[url('https://mdbcdn.b-cdn.net/img/new/slides/042.webp')] bg-cover bg-center bg-no-repeat rounded">
                     <div class="bg-dark absolute opacity-80 h-[100%] w-[100%] z-1"></div>
                     <div class="relative flex flex-row justify-end z-2 mt-3 pr-3 mb-20">

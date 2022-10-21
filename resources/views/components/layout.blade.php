@@ -77,7 +77,7 @@
                                     <input type="text" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
                                     <label class="font-bold mb-2">Password</label>
                                     <input type="password" id="password" name="password" placeholder="Password" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
-                                    <button type="button" class="px-5 py-3 bg-purple-600 font-bold text-white rounded" data-bs-dismiss="modal">LOGIN</button>
+                                    <button class="px-5 py-3 bg-highlight font-bold text-white rounded" data-bs-dismiss="modal">LOGIN</button>
                                 </form>
                                 <p class="font-montserrat">Don't have an account? <a href="#register" class="text-highlight font-bold">Register</a></p>
                             </div>
@@ -108,7 +108,7 @@
                                         <input type="text" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
                                         <label class="font-bold mb-2">Password</label>
                                         <input type="password" id="password" name="password" placeholder="Password" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
-                                        <button type="button" class="px-5 py-3 bg-purple-600 font-bold text-white rounded" data-bs-dismiss="modal">LOGIN</button>
+                                        <button class="px-5 py-3 bg-highlight font-bold text-white rounded" data-bs-dismiss="modal">REGISTER</button>
                                     </form>
                                     <p class="font-montserrat">Already have an account? <a href="#login" class="text-highlight font-bold">Login</a></p>
                                 </div>

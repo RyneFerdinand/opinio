@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get("/create-edit", function(){
     return view('components.create-edit-article');
 });
+
+Route::get('/article', function(){
+    return view('components.article');
+});

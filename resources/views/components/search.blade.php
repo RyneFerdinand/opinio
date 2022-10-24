@@ -1,19 +1,72 @@
 @extends('components.layout');
 
 @section('content')
-    <section class="font-montserrat">
-        <div class="flex flex-col justify-center items-center">
-            <img src={{asset('images/chainsawman-thumbnail.png')}} class="w-[90vw] h-[40vh] p-3 rounded">
-            <img src={{asset('images/author-image.png')}} class="w-[10vw] mt-[-100px] mb-5">
-            <h1 class="font-bold text-5xl mb-3">Kevin Bennett</h1>
-            <h3 class="text-xl text-dark/[50%] mb-5">12 Articles</h3>
-            <h3 class="text-xl text-dark/[50%] w-[50vw] text-center mb-5">I Write what I want and when I want. A Comic, Manga, Movie, Gaming, and Data Enthusiast at the same time. Contact me anytime ! 😁</h3>
-            <button
-                data-bs-toggle="modal" data-bs-target="#editprofile" class="font-bold text-white bg-highlight px-6 py-3 rounded-md hover:bg-dark hover:text-highlight transition-all ease-in duration-75">Edit Profile
-            </button>
+    <section class="font-montserrat mt-20 px-20">
+        <div class="flex flex-col">
+            <div class="flex flex-row font-bold text-5xl mb-10">
+                <div class="text-dark/[50%]">Results for</div>
+                <div class="text-black">&nbsp;Inflation</div>
+            </div>
+            <div class="flex flex-row items-center mb-10">
+                <div class="flex flex-row bg-highlight justify-center items-center rounded mr-5">
+                    <img class="px-4 py-2 font-bold" src={{asset('images/charm_filter.svg')}}>
+                    <div class="text-white font-bold text-2xl mr-5">Filter</div>
+                </div>
+                <div class="text-white font-bold px-4 py-2 mr-5 bg-highlight rounded-full">
+                    Film
+                </div>
+                <div class="text-white font-bold px-4 py-2 mr-5 bg-highlight rounded-full">
+                    Review
+                </div>
+            </div>
         </div>
-        <div class="flex flex-col px-20 mb-16">
-            <h1 class="font-bold text-3xl mb-5">Articles</h1>
+        <div class="flex flex-col">
+            <div class="flex flex-row justify-between mb-5">
+                <h1 class="font-bold text-black text-2xl">People</h1>
+                <a href="/" class="text-highlight text-2xl font-semibold">
+                    View More
+                </a>
+            </div>
+            <div class="grid grid-cols-5 gap-4 mb-5">
+                <div class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
+                    <img src={{asset('images/chainsawman-thumbnail.png')}} class="w-[100%] rounded">
+                    <img src={{asset('images/author-image.png')}} class="w-[5vw] mt-[-50px] mb-5">
+                    <h1 class="font-bold text-xl mb-1">Kevin Bennett</h1>
+                    <h3 class="text-l text-dark/[50%] mb-6">12 Articles</h3>
+                </div>
+                <div class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
+                    <img src={{asset('images/chainsawman-thumbnail.png')}} class="w-[100%] rounded">
+                    <img src={{asset('images/author-image.png')}} class="w-[5vw] mt-[-50px] mb-5">
+                    <h1 class="font-bold text-xl mb-1">Kevin Bennett</h1>
+                    <h3 class="text-l text-dark/[50%] mb-6">12 Articles</h3>
+                </div>
+                <div class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
+                    <img src={{asset('images/chainsawman-thumbnail.png')}} class="w-[100%] rounded">
+                    <img src={{asset('images/author-image.png')}} class="w-[5vw] mt-[-50px] mb-5">
+                    <h1 class="font-bold text-xl mb-1">Kevin Bennett</h1>
+                    <h3 class="text-l text-dark/[50%] mb-6">12 Articles</h3>
+                </div>
+                <div class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
+                    <img src={{asset('images/chainsawman-thumbnail.png')}} class="w-[100%] rounded">
+                    <img src={{asset('images/author-image.png')}} class="w-[5vw] mt-[-50px] mb-5">
+                    <h1 class="font-bold text-xl mb-1">Kevin Bennett</h1>
+                    <h3 class="text-l text-dark/[50%] mb-6">12 Articles</h3>
+                </div>
+                <div class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
+                    <img src={{asset('images/chainsawman-thumbnail.png')}} class="w-[100%] rounded">
+                    <img src={{asset('images/author-image.png')}} class="w-[5vw] mt-[-50px] mb-5">
+                    <h1 class="font-bold text-xl mb-1">Kevin Bennett</h1>
+                    <h3 class="text-l text-dark/[50%] mb-6">12 Articles</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col mb-16">
+            <div class="flex flex-row justify-between mb-5">
+                <h1 class="font-bold text-black text-2xl">Articles</h1>
+                <a href="/" class="text-highlight text-2xl font-semibold">
+                    View More
+                </a>
+            </div>
             <div class="grid grid-cols-3 gap-10">
                 <div class="relative w-[28vw] h-[40vh] bg-[url('https://mdbcdn.b-cdn.net/img/new/slides/042.webp')] bg-cover bg-center bg-no-repeat rounded">
                     <div class="bg-dark absolute opacity-80 h-[100%] w-[100%] z-1"></div>
@@ -222,23 +275,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="flex flex-row justify-end px-20 mb-16">
-            <div class="rounded-l border-r border-l bg-white px-5 py-3 font-bold">
-                <
-            </div>
-            <div class="bg-black border-r border-l text-white px-5 py-3 font-bold">
-                1
-            </div>
-            <div class="bg-white border-r border-l px-5 py-3 font-bold">
-                2
-            </div>
-            <div class="bg-white border-r border-l px-5 py-3 font-bold">
-                3
-            </div>
-            <div class="rounded-r border-r border-l bg-white px-5 py-3 font-bold">
-                >
             </div>
         </div>
     </section>

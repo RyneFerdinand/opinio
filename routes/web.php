@@ -28,3 +28,8 @@ Route::get('/article', function(){
 Route::get('/profile', function(){
     return view('components.profile-page');
 });
+
+
+Route::get('/search', function(){
+    return view('components.search');
+});

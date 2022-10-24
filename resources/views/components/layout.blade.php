@@ -73,9 +73,9 @@
                             </div>
                             <div class="modal-body relative p-8 font-montserrat">
                                 <form class="flex flex-col">
-                                    <label class="font-bold mb-2">Email</label>
+                                    <label class="font-medium mb-2">Email</label>
                                     <input type="text" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
-                                    <label class="font-bold mb-2">Password</label>
+                                    <label class="font-medium mb-2">Password</label>
                                     <input type="password" id="password" name="password" placeholder="Password" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
                                     <button class="px-5 py-3 bg-highlight font-bold text-white rounded" data-bs-dismiss="modal">LOGIN</button>
                                 </form>
@@ -102,11 +102,11 @@
                                 </div>
                                 <div class="modal-body relative p-8 font-montserrat">
                                     <form class="flex flex-col">
-                                        <label class="font-bold mb-2">Name</label>
+                                        <label class="font-medium mb-2">Name</label>
                                         <input type="text" id="name" name="name" placeholder="Name" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
-                                        <label class="font-bold mb-2">Email</label>
+                                        <label class="font-medium mb-2">Email</label>
                                         <input type="text" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
-                                        <label class="font-bold mb-2">Password</label>
+                                        <label class="font-medium mb-2">Password</label>
                                         <input type="password" id="password" name="password" placeholder="Password" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
                                         <button class="px-5 py-3 bg-highlight font-bold text-white rounded" data-bs-dismiss="modal">REGISTER</button>
                                     </form>

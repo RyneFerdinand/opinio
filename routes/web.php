@@ -14,22 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view("components.home");
+    return view("home");
 });
 
 Route::get("/create-edit", function(){
-    return view('components.create-edit-article');
+    return view('create-edit-article');
 });
 
 Route::get('/article', function(){
-    return view('components.article');
+    return view('article');
 });
 
 Route::get('/profile', function(){
-    return view('components.profile-page');
+    return view('profile-page');
 });
 
 
 Route::get('/search', function(){
-    return view('components.search');
+    return view('search');
 });

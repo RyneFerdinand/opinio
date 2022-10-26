@@ -99,71 +99,10 @@
         <div class="flex flex-row font-montserrat">
             <div class="flex flex-col pl-[5vw] mr-16">
                 <h1 class="text-black font-bold text-5xl mt-20 mb-10">Recent Article</h1>
-                <a href="/" class="flex flex-row w-[60vw] bg-white rounded drop-shadow mb-5">
-                    <img src={{asset('images/article-cover-image.png')}} class="mr-5 w-[215px] h-[213px]">
-                    <div class="flex flex-col justify-center">
-                        <h1 class="font-bold text-3xl float-left mb-3">The World's Inflation</h1>
-                        <p class="font-poppins mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis neque purus elit, suscipit eget. Vulputate aliquet convallis quis feugiat habitant tincidunt rhoncus...</p>
-                        <div class="flex flex-row items-center">
-                            <img src={{asset('images/author-image.png')}} class="w-[30px] h-[30px] mr-3">
-                            <h5 class="mr-5">Ryne Ferdinand</h5>
-                            <p class="mr-5 text-dark opacity-[59%]">|</p>
-                            <h5 class="text-dark opacity-[59%]">08.08.2022</h5>
-                        </div>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[60vw] bg-white rounded drop-shadow mb-5">
-                    <img src={{asset('images/article-cover-image.png')}} class="mr-5 w-[215px] h-[213px]">
-                    <div class="flex flex-col justify-center">
-                        <h1 class="font-bold text-3xl float-left mb-3">The World's Inflation</h1>
-                        <p class="font-poppins mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis neque purus elit, suscipit eget. Vulputate aliquet convallis quis feugiat habitant tincidunt rhoncus...</p>
-                        <div class="flex flex-row items-center">
-                            <img src={{asset('images/author-image.png')}} class="w-[30px] h-[30px] mr-3">
-                            <h5 class="mr-5">Ryne Ferdinand</h5>
-                            <p class="mr-5 text-dark opacity-[59%]">|</p>
-                            <h5 class="text-dark opacity-[59%]">08.08.2022</h5>
-                        </div>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[60vw] bg-white rounded drop-shadow mb-5">
-                    <img src={{asset('images/article-cover-image.png')}} class="mr-5 w-[215px] h-[213px]">
-                    <div class="flex flex-col justify-center">
-                        <h1 class="font-bold text-3xl float-left mb-3">The World's Inflation</h1>
-                        <p class="font-poppins mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis neque purus elit, suscipit eget. Vulputate aliquet convallis quis feugiat habitant tincidunt rhoncus...</p>
-                        <div class="flex flex-row items-center">
-                            <img src={{asset('images/author-image.png')}} class="w-[30px] h-[30px] mr-3">
-                            <h5 class="mr-5">Ryne Ferdinand</h5>
-                            <p class="mr-5 text-dark opacity-[59%]">|</p>
-                            <h5 class="text-dark opacity-[59%]">08.08.2022</h5>
-                        </div>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[60vw] bg-white rounded drop-shadow mb-5">
-                    <img src={{asset('images/article-cover-image.png')}} class="mr-5 w-[215px] h-[213px]">
-                    <div class="flex flex-col justify-center">
-                        <h1 class="font-bold text-3xl float-left mb-3">The World's Inflation</h1>
-                        <p class="font-poppins mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis neque purus elit, suscipit eget. Vulputate aliquet convallis quis feugiat habitant tincidunt rhoncus...</p>
-                        <div class="flex flex-row items-center">
-                            <img src={{asset('images/author-image.png')}} class="w-[30px] h-[30px] mr-3">
-                            <h5 class="mr-5">Ryne Ferdinand</h5>
-                            <p class="mr-5 text-dark opacity-[59%]">|</p>
-                            <h5 class="text-dark opacity-[59%]">08.08.2022</h5>
-                        </div>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[60vw] bg-white rounded drop-shadow mb-5">
-                    <img src={{asset('images/article-cover-image.png')}} class="mr-5 w-[215px] h-[213px]">
-                    <div class="flex flex-col justify-center">
-                        <h1 class="font-bold text-3xl float-left mb-3">The World's Inflation</h1>
-                        <p class="font-poppins mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec quis neque purus elit, suscipit eget. Vulputate aliquet convallis quis feugiat habitant tincidunt rhoncus...</p>
-                        <div class="flex flex-row items-center">
-                            <img src={{asset('images/author-image.png')}} class="w-[30px] h-[30px] mr-3">
-                            <h5 class="mr-5">Ryne Ferdinand</h5>
-                            <p class="mr-5 text-dark opacity-[59%]">|</p>
-                            <h5 class="text-dark opacity-[59%]">08.08.2022</h5>
-                        </div>
-                    </div>
-                </a>
+                <x-article-card></x-article-card>
+                <x-article-card></x-article-card>
+                <x-article-card></x-article-card>
+                <x-article-card></x-article-card>
             </div>
             <div class="flex flex-col">
                 <h1 class="text-xl font-bold pt-16 mb-10">Discover by Categories</h1>
@@ -197,41 +136,12 @@
                     </a>
                 </div>
                 <h1 class="text-xl font-bold pt-16 mb-10">Check out these authors</h1>
-                <a href="/" class="flex flex-row w-[25vw] bg-white rounded drop-shadow mb-5 items-center p-5">
-                    <img src={{asset('images/author-image.png')}} class="mr-5 w-[54px] h-[55px]">
-                    <div class="flex flex-col justify-center">
-                        <h5 class="font-bold text-xl">Ryne Ferdinand</h5>
-                        <h5 class="text-dark opacity-[59%]">9 Articles</h5>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[25vw] bg-white rounded drop-shadow mb-5 items-center p-5">
-                    <img src={{asset('images/author-image.png')}} class="mr-5 w-[54px] h-[55px]">
-                    <div class="flex flex-col justify-center">
-                        <h5 class="font-bold text-xl">Ryne Ferdinand</h5>
-                        <h5 class="text-dark opacity-[59%]">9 Articles</h5>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[25vw] bg-white rounded drop-shadow mb-5 items-center p-5">
-                    <img src={{asset('images/author-image.png')}} class="mr-5 w-[54px] h-[55px]">
-                    <div class="flex flex-col justify-center">
-                        <h5 class="font-bold text-xl">Ryne Ferdinand</h5>
-                        <h5 class="text-dark opacity-[59%]">9 Articles</h5>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[25vw] bg-white rounded drop-shadow mb-5 items-center p-5">
-                    <img src={{asset('images/author-image.png')}} class="mr-5 w-[54px] h-[55px]">
-                    <div class="flex flex-col justify-center">
-                        <h5 class="font-bold text-xl">Ryne Ferdinand</h5>
-                        <h5 class="text-dark opacity-[59%]">9 Articles</h5>
-                    </div>
-                </a>
-                <a href="/" class="flex flex-row w-[25vw] bg-white rounded drop-shadow mb-5 items-center p-5">
-                    <img src={{asset('images/author-image.png')}} class="mr-5 w-[54px] h-[55px]">
-                    <div class="flex flex-col justify-center">
-                        <h5 class="font-bold text-xl">Ryne Ferdinand</h5>
-                        <h5 class="text-dark opacity-[59%]">9 Articles</h5>
-                    </div>
-                </a>
+                <x-author-card-small></x-author-card-small>
+                <x-author-card-small></x-author-card-small>
+                <x-author-card-small></x-author-card-small>
+                <x-author-card-small></x-author-card-small>
+                <x-author-card-small></x-author-card-small>
+                <x-author-card-small></x-author-card-small>
             </div>
         </div>
     </section>

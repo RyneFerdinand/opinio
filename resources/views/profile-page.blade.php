@@ -60,7 +60,7 @@
                                 <label class="font-medium mb-2">Name</label>
                                 <input type="text" id="name" name="name" placeholder="Name" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]" value="{{Auth::user()->name}}">
                                 <label class="font-medium mb-2">Email</label>
-                                <input type="text" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]" value="{{Auth::user()->email}}">
+                                <input type="email" id="email" name="email" placeholder="Email" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]" value="{{Auth::user()->email}}">
                                 <label class="font-medium mb-2">Bio</label>
                                 <textarea id="bio" name="bio" placeholder="Bio" class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]" value="{{Auth::user()->about}}"></textarea>
                                 <button class="px-5 py-3 bg-highlight font-bold text-white rounded hover:bg-dark hover:text-highlight transition-all ease-in duration-75" data-bs-dismiss="modal">UPDATE</button>

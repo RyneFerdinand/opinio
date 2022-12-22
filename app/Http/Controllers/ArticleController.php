@@ -30,12 +30,32 @@ class ArticleController extends Controller
             array_push($category_id, $category->id);
         }
 
-        $articles = Article::with('categories')->whereHas('categories', function ($category) use ($category_id){
-            $category->whereIn('id', $category_id);
-        })->where('id', '!=', $id)->get()->sortBy(function ($article){
-                return $article->likes->count();
-            })->reverse()->sortBy('title')->take(3);
+        // $articles = Article::with('categories')->whereHas('categories', function ($category) use ($category_id){
+        //     $category->whereIn('id', $category_id);
+        // })->where('id', '!=', $id)->get()->sortBy(function ($article){
+        //         return $article->likes->count();
+        //     })->reverse()->sortBy('title')->take(3);
 
+        $article_id = [];
+        $articles = Article::all();
+        foreach ($articles as $article){
+            if ($article->id != $id){
+                if (count($article->categories) == count($category_id)){
+                    $temp = true;
+                    foreach ($article->categories as $category){
+                        if (!in_array($category->id, $category_id)){
+                            $temp = false;
+                            break;
+                        }
+                    }
+                    if ($temp == true){
+                        array_push($article_id, $article->id);
+                    }
+
+                }
+            }
+        }
+        $articles = Article::find($article_id);
         return $articles;
     }
 

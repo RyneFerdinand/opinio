@@ -1,4 +1,4 @@
-@extends('components.layout');
+@extends('components.layout', ['articles' => ($articles = App\Models\Article::all())])
 
 @section('content')
     <section>

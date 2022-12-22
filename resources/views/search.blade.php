@@ -1,11 +1,11 @@
-@extends('components.layout');
+@extends('components.layout', ['articles' => ($articles = App\Models\Article::all())])
 
 @section('content')
     <section class="font-montserrat mt-20 px-20">
         <div class="flex flex-col">
             <div class="flex flex-row font-bold text-5xl mb-10">
                 <div class="text-dark/[50%]">Results for</div>
-                <div class="text-black">&nbsp;Inflation</div>
+                <div class="text-black">&nbsp;{{$query}}</div>
             </div>
             <div class="flex flex-row items-center mb-10">
                 <button  data-bs-toggle="modal" data-bs-target="#filter" class="flex flex-row bg-highlight justify-center items-center rounded mr-5">
@@ -57,37 +57,66 @@
             </div>
         </div>
         <div class="flex flex-col">
-            <div class="flex flex-row justify-between mb-5">
-                <h1 class="font-bold text-black text-2xl">People</h1>
-                <a href="/" class="text-highlight text-2xl font-semibold">
-                    View More
-                </a>
-            </div>
+            @if (count($users) <= 0)
+                <div class="flex flex-col mb-5">
+                    <h1 class="font-bold text-black text-2xl">People</h1>
+                    <h1 class="font-bold text-black text-2xl">No People Found</h1>
+                </div>
+            @else
+                <div class="flex flex-row justify-between mb-5">
+                    <h1 class="font-bold text-black text-2xl">People</h1>
+                    @if (count($users) > 5)
+                        <a href="{{url('/people/'.$query)}}" class="text-highlight text-2xl font-semibold">
+                            View More
+                        </a>
+                    @endif
+                </div>
+            @endif
+            @php
+                $ctr = 0;
+            @endphp
             <div class="grid grid-cols-5 gap-4 mb-5">
-                <x-author-card-large></x-author-card-large>
-                <x-author-card-large></x-author-card-large>
-                <x-author-card-large></x-author-card-large>
-                <x-author-card-large></x-author-card-large>
-                <x-author-card-large></x-author-card-large>
+                @foreach ($users as $user)
+                    @php
+                        $ctr++;
+                    @endphp
+                    <x-author-card-large :user="$user"></x-author-card-large>
+                    @if ($ctr == 5)
+                        @break
+                    @endif
+                @endforeach
             </div>
         </div>
         <div class="flex flex-col mb-16">
-            <div class="flex flex-row justify-between mb-5">
-                <h1 class="font-bold text-black text-2xl">Articles</h1>
-                <a href="/" class="text-highlight text-2xl font-semibold">
-                    View More
-                </a>
-            </div>
-            <div class="grid grid-cols-3 gap-10">
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
-                <x-article-card-large></x-article-card-large>
+            @if (count($articles) <= 0)
+                <div class="flex flex-col mb-5">
+                    <h1 class="font-bold text-black text-2xl">Articles</h1>
+                    <h1 class="font-bold text-black text-2xl">No Articles Found</h1>
+                </div>
+            @else
+                <div class="flex flex-row justify-between mb-5">
+                    <h1 class="font-bold text-black text-2xl">Articles</h1>
+                    @if (count($articles) > 9)
+                        <a href="{{url('/articles/'.$query)}}" class="text-highlight text-2xl font-semibold">
+                            View More
+                        </a>
+                    @endif
+                </div>
+            @endif
+            @php
+                $ctr = 0;
+            @endphp
+            <div class="grid grid-cols-3 gap-16">
+                @foreach ($articles as $article)
+                    @php
+                        $ctr++;
+
+                    @endphp
+                    <x-article-card-large :article="$article"></x-article-card-large>
+                    @if ($ctr == 9)
+                        @break
+                    @endif
+                @endforeach
             </div>
         </div>
     </section>

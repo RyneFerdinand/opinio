@@ -1,6 +1,18 @@
-<div class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
-    <img src={{asset('images/chainsawman-thumbnail.png')}} class="w-[100%] rounded">
-    <img src={{asset('images/author-image.png')}} class="w-[5vw] mt-[-50px] mb-5">
-    <h1 class="font-bold text-xl mb-1">Kevin Bennett</h1>
-    <h3 class="text-l text-dark/[50%] mb-6">12 Articles</h3>
-</div>
+@props(['user'])
+<a href="{{url('/user/'.$user->id)}}" class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
+    @if ($user->coverPicture != "")
+        <img src={{asset($user->coverPicture)}} class="w-[100%] h-[200px] rounded">
+    @else
+        <div class="w-full h-[200px] rounded bg-dark">
+        </div>
+    @endif
+    <img src={{asset($user->profilePicture)}} class="w-[5vw] mt-[-50px] mb-5 rounded-full">
+    <h1 class="font-bold text-xl mb-1 text-center">{{$user->name}}</h1>
+    <h3 class="text-l text-dark/[50%] mb-6">{{count($user->articles)}}
+        @if (count($user->articles) <= 1)
+            Article
+        @else
+            Articles
+        @endif
+    </h3>
+</a>

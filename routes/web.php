@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,23 +17,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view("home");
-});
+Route::get('/', [Controller::class, 'home']);
 
-Route::get("/create-edit", function(){
-    return view('create-edit-article');
-});
+Route::post('/login', [UserController::class, 'login']);
 
-Route::get('/article', function(){
-    return view('article');
-});
+Route::post('/register', [UserController::class, 'register']);
 
-Route::get('/profile', function(){
-    return view('profile-page');
-});
+Route::get('/logout', [UserController::class, 'logout']);
 
+Route::get('/user/{id}', [UserController::class, 'profile']);
 
-Route::get('/search', function(){
-    return view('search');
-});
+Route::get('/people/{query}', [Controller::class, 'viewMorePeople']);
+
+Route::get('/articles/{query}', [Controller::class, 'viewMoreArticles']);
+
+Route::get('/search', [Controller::class, 'search']);
+
+Route::get('/article/{id}', [Controller::class, 'article']);
+
+Route::post('/comment/{id}', [CommentController::class, 'store']);

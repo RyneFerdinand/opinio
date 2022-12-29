@@ -11,22 +11,25 @@ use Illuminate\Support\Facades\DB;
 class ArticleController extends Controller
 {
     //
-    public function getHomeArticles(){
-        $articles = Article::orderBy('created_at', 'desc')->take(4)->get();
+    public function getHomeArticles()
+    {
+        $articles = Article::orderBy('created_at', 'asc')->take(4)->get();
 
         return $articles;
     }
 
-    public function getArticleById($id){
+    public function getArticleById($id)
+    {
         $article = Article::find($id);
 
         return $article;
     }
 
-    public function getRelatedArticles($id){
+    public function getRelatedArticles($id)
+    {
         $article = Article::find($id);
         $category_id = [];
-        foreach ($article->categories as $category){
+        foreach ($article->categories as $category) {
             array_push($category_id, $category->id);
         }
 
@@ -38,20 +41,19 @@ class ArticleController extends Controller
 
         $article_id = [];
         $articles = Article::all();
-        foreach ($articles as $article){
-            if ($article->id != $id){
-                if (count($article->categories) == count($category_id)){
+        foreach ($articles as $article) {
+            if ($article->id != $id) {
+                if (count($article->categories) == count($category_id)) {
                     $temp = true;
-                    foreach ($article->categories as $category){
-                        if (!in_array($category->id, $category_id)){
+                    foreach ($article->categories as $category) {
+                        if (!in_array($category->id, $category_id)) {
                             $temp = false;
                             break;
                         }
                     }
-                    if ($temp == true){
+                    if ($temp == true) {
                         array_push($article_id, $article->id);
                     }
-
                 }
             }
         }
@@ -59,13 +61,15 @@ class ArticleController extends Controller
         return $articles;
     }
 
-    public function search($query){
+    public function search($query)
+    {
         $articles = Article::where('title', 'LIKE', "%$query%")->get();
 
         return $articles;
     }
 
-    public function index(){
+    public function index()
+    {
         $articles = Article::all();
 
         return view('articles', compact('articles'));

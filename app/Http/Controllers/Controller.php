@@ -12,7 +12,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function home(){
+    public function home()
+    {
         $articles = app(ArticleController::class)->getHomeArticles();
         $categories = app(CategoryController::class)->getHomeCategories();
         $users = app(UserController::class)->getHomeUsers();
@@ -20,14 +21,16 @@ class Controller extends BaseController
         return view('home', compact('articles', 'categories', 'users'));
     }
 
-    public function article($id){
+    public function article($id)
+    {
         $article = app(ArticleController::class)->getArticleById($id);
         $articles = app(ArticleController::class)->getRelatedArticles($id);
 
         return view('article', compact('article', 'articles'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $query = $request->query('query');
 
         $articles = app(ArticleController::class)->search($query);
@@ -36,13 +39,15 @@ class Controller extends BaseController
         return view('search', compact('query', 'articles', 'users'));
     }
 
-    public function viewMorePeople($query){
+    public function viewMorePeople($query)
+    {
         $users = app(UserController::class)->search($query);
 
         return view('people', compact('query', 'users'));
     }
 
-    public function viewMoreArticles($query){
+    public function viewMoreArticles($query)
+    {
         $articles = app(ArticleController::class)->search($query);
 
         return view('articles', compact('query', 'articles'));

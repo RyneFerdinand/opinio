@@ -14,13 +14,14 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
-        $user = User::factory(1)->create();
+
+        $randomId = random_int(0, 50);
+
         return [
-            //
-            'user_id' => $user[0]->id,
+            'user_id' => User::factory(1)->createOne()->id,
             'title' => $this->faker->sentence(),
             'content' => $this->faker->paragraph($nbSentences = 50, $variableNbSentences = true),
-            'picture' => $this->faker->imageUrl($width = 200, $height = 200),
+            'picture' => "https://picsum.photos/id/$randomId/1080/720",
         ];
     }
 }

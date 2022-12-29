@@ -14,12 +14,15 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $userProfileId = random_int(0, 8);
+        $userCoverId = random_int(201, 250);
+
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('secret'),
-            'profilePicture' => $this->faker->imageUrl($width = 200, $height = 200),
-            'coverPicture' => $this->faker->imageUrl($width = 200, $height = 200),
+            'profilePicture' => "https://randomuser.me/api/portraits/lego/$userProfileId.jpg",
+            'coverPicture' => "https://picsum.photos/id/$userCoverId/1080/720",
             'about' => $this->faker->paragraph(),
         ];
     }

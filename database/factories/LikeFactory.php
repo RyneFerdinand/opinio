@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LikeFactory extends Factory
@@ -16,9 +17,8 @@ class LikeFactory extends Factory
     {
         $article = Article::factory(1)->hasCategories(2)->create();
         return [
-            //
-            'article_id' => $article[0]->id,
-            'user_id' => $article[0]->user_id,
+            'article_id' => Article::factory()->createOne()->id,
+            'user_id' => User::factory()->createOne()->id,
         ];
     }
 }

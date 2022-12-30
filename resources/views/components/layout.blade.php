@@ -161,3 +161,11 @@
 </body>
 
 </html>
+<script>
+    var heightHeader = document.getElementById('header').offsetHeight;
+    var heightFooter = document.getElementById('footer').offsetHeight;
+    var heightScreen = screen.height;
+    var heightContent = heightScreen - heightHeader - heightFooter;
+
+    document.getElementById('content').style.minHeight = heightContent + "px";
+</script>

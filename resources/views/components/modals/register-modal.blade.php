@@ -21,7 +21,8 @@
                     <label class="font-medium mb-2">Password</label>
                     <input type="password" id="password" name="password" placeholder="Password"
                         class="mb-5 border-[1px] rounded p-3 border-dark/[0.5]">
-                    <button class="px-5 py-3 bg-highlight font-bold text-white rounded"
+                    <button
+                        class="px-5 py-3 bg-highlight font-bold text-white rounded hover:bg-dark hover:text-highlight transition-all ease-in duration-75"
                         data-bs-dismiss="modal">REGISTER</button>
                 </form>
                 <p class="font-montserrat">Already have an account? <a href="#login"

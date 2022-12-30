@@ -14,7 +14,7 @@
             <h1 class="font-bold text-3xl mb-1">{{ $article->title }}</h1>
             <p class="text-dark/[60%] mb-10">Mappa's most anticipated anime of the year</p>
             <p class="text-highlight font-bold mb-16">By {{ $article->user->name }}</p>
-            <img src={{ asset($article->picture) }} class="w-[90vw] h-[75vh] p-3 rounded">
+            <img src={{ asset($article->picture) }} class="w-[90vw] h-[75vh] p-3 rounded object-cover">
         </div>
         <div class="flex flex-row justify-around">
             <div class="flex flex-row">
@@ -36,7 +36,8 @@
                 </div>
             </div>
             <div class="flex flex-col items-center">
-                <img src={{ asset($article->user->profilePicture) }} class="mb-5 w-[50px] h-[50px] rounded-full">
+                <img src={{ asset($article->user->profilePicture) }}
+                    class="mb-5 w-[50px] h-[50px] rounded-full  object-cover">
                 <img src={{ asset('images/akar-icons_link-chain.png') }} class="mb-5 w-[40px] h-[40px]">
                 <img src={{ asset('images/ant-design_edit-outlined.png') }} class="mb-5 w-[40px] h-[40px]">
                 <img src={{ asset('images/akar-icons_heart.png') }} class="mb-5 w-[40px] h-[40px]">
@@ -75,7 +76,7 @@
                                             <hr>
                                             <div class="flex flex-row px-8 py-4 items-center">
                                                 <img src={{ asset('images/author-image.png') }}
-                                                    class="w-[50px] h-[50px] mr-5">
+                                                    class="w-[50px] h-[50px] mr-5 object-cover">
                                                 <div class="flex flex-col">
                                                     <div class="font-medium text-xl text-black">
                                                         {{ $comment->user->name }}

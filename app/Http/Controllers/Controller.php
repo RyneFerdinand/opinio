@@ -32,11 +32,13 @@ class Controller extends BaseController
     public function search(Request $request)
     {
         $query = $request->query('query');
+        $filters = $request->query('categories');
 
         $articles = app(ArticleController::class)->search($query);
         $users = app(UserController::class)->search($query);
+        $categories = app(CategoryController::class)->getAllCategories();
 
-        return view('search', compact('query', 'articles', 'users'));
+        return view('search', compact('query', 'articles', 'users', 'categories'));
     }
 
     public function viewMorePeople($query)

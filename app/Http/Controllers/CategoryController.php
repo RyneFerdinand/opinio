@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     //
-    public function getHomeCategories(){
+    public function getHomeCategories()
+    {
         $categories = Category::skip(0)->take(10)->get();
 
         return $categories;
+    }
+
+    public function getAllCategories()
+    {
+        return Category::all();
     }
 }

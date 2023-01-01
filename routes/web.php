@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,19 +21,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'home']);
 
 Route::post('/login', [UserController::class, 'login']);
-
 Route::post('/register', [UserController::class, 'register']);
-
 Route::get('/logout', [UserController::class, 'logout']);
 
 Route::get('/user/{id}', [UserController::class, 'profile']);
-
 Route::get('/people/{query}', [Controller::class, 'viewMorePeople']);
-
 Route::get('/articles/{query}', [Controller::class, 'viewMoreArticles']);
 
 Route::get('/search', [Controller::class, 'search']);
-
 Route::get('/article/{id}', [Controller::class, 'article']);
-
 Route::post('/comment/{id}', [CommentController::class, 'store']);
+Route::delete('/comment/{comment}', [CommentController::class, 'delete']);
+
+Route::post('/like/{id}', [LikeController::class, 'toggleLike']);
+
+Route::get('/login', [UserController::class, 'showLogin']);
+Route::get('/register', [UserController::class, 'showRegister']);

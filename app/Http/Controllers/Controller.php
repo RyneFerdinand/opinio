@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
@@ -18,38 +20,54 @@ class Controller extends BaseController
         $categories = app(CategoryController::class)->getHomeCategories();
         $users = app(UserController::class)->getHomeUsers();
 
-        return view('home', compact('articles', 'categories', 'users'));
+        $articlesCount = count(Article::all());
+
+        return view('home', compact('articles', 'categories', 'users', 'articlesCount'));
     }
 
     public function article($id)
     {
         $article = app(ArticleController::class)->getArticleById($id);
-        $articles = app(ArticleController::class)->getRelatedArticles($id);
+        // $articles = app(ArticleController::class)->getRelatedArticles($id);
+        $user = Auth::user();
 
-        return view('article', compact('article', 'articles'));
+        $isLiked = false;
+
+        foreach ($article->likes as $like) {
+            if ($like->user_id == $user->id) $isLiked = true;
+        }
+        $articles = Article::all()->take(3);
+        $articlesCount = count(Article::all());
+
+        return view('article', compact('article', 'articles', 'isLiked', 'articlesCount'));
     }
 
     public function search(Request $request)
     {
         $query = $request->query('query');
+        $filters = $request->query('categories');
 
         $articles = app(ArticleController::class)->search($query);
         $users = app(UserController::class)->search($query);
+        $categories = app(CategoryController::class)->getAllCategories();
 
-        return view('search', compact('query', 'articles', 'users'));
+        $articlesCount = count(Article::all());
+        return view('search', compact('query', 'articles', 'users', 'categories', 'articleCount'));
     }
 
     public function viewMorePeople($query)
     {
         $users = app(UserController::class)->search($query);
 
-        return view('people', compact('query', 'users'));
+        $articlesCount = count(Article::all());
+        return view('people', compact('query', 'users', 'articlesCount'));
     }
 
     public function viewMoreArticles($query)
     {
         $articles = app(ArticleController::class)->search($query);
 
-        return view('articles', compact('query', 'articles'));
+        $articlesCount = count(Article::all());
+        return view('articles', compact('query', 'articles', 'articlesCount'));
     }
 }

@@ -4,8 +4,8 @@
     <section class="font-montserrat">
         <div class="flex flex-col justify-center items-center">
 
-            <img src={{ $user->coverPicture }} class="w-[90vw] h-[40vh] p-3 rounded-2xl">
-            <img src={{ $user->profilePicture }} class="w-[10vw] mt-[-100px] mb-5 rounded-full">
+            <img src={{ $user->coverPicture }} class="w-[90vw] h-[40vh] p-3 rounded-2xl object-cover">
+            <img src={{ $user->profilePicture }} class="w-[10vw] mt-[-100px] mb-5 rounded-full object-cover">
             <h1 class="font-bold text-5xl mb-3 text-center">{{ $user->name }}</h1>
             <h3 class="text-xl text-dark/[50%] mb-5">{{ count($user->articles) }}
                 @if (count($user->articles) <= 1)
@@ -38,12 +38,12 @@
                         <div class="modal-body relative p-8 font-montserrat">
                             <div class="flex flex-col items-center justify-center mb-5">
                                 @if ($user->coverPicture != '')
-                                    <img src={{ asset($user->coverPicture) }} class="w-full h-40 rounded">
+                                    <img src={{ asset($user->coverPicture) }} class="w-full h-40 rounded object-cover">
                                 @else
                                     <div class="w-full h-40 rounded bg-dark">
                                     </div>
                                 @endif
-                                <img src={{ asset($user->profilePicture) }} class="w-[25%] mt-[-65px] mb-5">
+                                <img src={{ asset($user->profilePicture) }} class="w-[25%] mt-[-65px] mb-5 object-cover">
                                 <div class="flex flex-row justify-center items-center text-xl">
                                     <div class="text-highlight underline mr-5 font-bold">
                                         Personal

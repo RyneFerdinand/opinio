@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
@@ -71,7 +72,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
-
-        return view('articles', compact('articles'));
+        $articlesCount = count($articles);
+        return view('articles', compact('articles', 'articlesCount'));
     }
 }

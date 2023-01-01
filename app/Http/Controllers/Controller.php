@@ -20,7 +20,9 @@ class Controller extends BaseController
         $categories = app(CategoryController::class)->getHomeCategories();
         $users = app(UserController::class)->getHomeUsers();
 
-        return view('home', compact('articles', 'categories', 'users'));
+        $articlesCount = count(Article::all());
+
+        return view('home', compact('articles', 'categories', 'users', 'articlesCount'));
     }
 
     public function article($id)
@@ -35,8 +37,9 @@ class Controller extends BaseController
             if ($like->user_id == $user->id) $isLiked = true;
         }
         $articles = Article::all()->take(3);
+        $articlesCount = count(Article::all());
 
-        return view('article', compact('article', 'articles', 'isLiked'));
+        return view('article', compact('article', 'articles', 'isLiked', 'articlesCount'));
     }
 
     public function search(Request $request)
@@ -48,20 +51,23 @@ class Controller extends BaseController
         $users = app(UserController::class)->search($query);
         $categories = app(CategoryController::class)->getAllCategories();
 
-        return view('search', compact('query', 'articles', 'users', 'categories'));
+        $articlesCount = count(Article::all());
+        return view('search', compact('query', 'articles', 'users', 'categories', 'articleCount'));
     }
 
     public function viewMorePeople($query)
     {
         $users = app(UserController::class)->search($query);
 
-        return view('people', compact('query', 'users'));
+        $articlesCount = count(Article::all());
+        return view('people', compact('query', 'users', 'articlesCount'));
     }
 
     public function viewMoreArticles($query)
     {
         $articles = app(ArticleController::class)->search($query);
 
-        return view('articles', compact('query', 'articles'));
+        $articlesCount = count(Article::all());
+        return view('articles', compact('query', 'articles', 'articlesCount'));
     }
 }

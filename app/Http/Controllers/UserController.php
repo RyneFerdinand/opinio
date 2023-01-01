@@ -23,7 +23,8 @@ class UserController extends Controller
     public function showLogin()
     {
         $articles = Article::all();
-        return view('login', compact('articles'));
+        $articlesCount = count(Article::all());
+        return view('login', compact('articles', 'articlesCount'));
     }
 
     public function login(Request $request)
@@ -58,7 +59,9 @@ class UserController extends Controller
     public function showRegister()
     {
         $articles = Article::all();
-        return view('register', compact('articles'));
+        $articlesCount = count(Article::all());
+
+        return view('register', compact('articles', 'articlesCount'));
     }
 
     public function register(Request $request)
@@ -98,7 +101,8 @@ class UserController extends Controller
         $user = User::find($id);
         $articles = $user->articles()->paginate(9);
 
-        return view('profile-page', compact('articles', 'user'));
+        $articlesCount = count(Article::all());
+        return view('profile-page', compact('articles', 'user', 'articlesCount'));
     }
 
     public function logout()

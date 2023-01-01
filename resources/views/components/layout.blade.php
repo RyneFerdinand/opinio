@@ -113,17 +113,33 @@
     </div>
 
     <footer id="footer" class="bg-dark text-white px-12 py-20 font-montserrat">
-        <div class="grid grid-cols-4 gap-24 ">
+        <div class="grid lg:grid-cols-4 gap-10 lg:gap-24">
             <div class="flex flex-col gap-4">
-                <img src="{{ asset('images/logo-light.svg') }}" class="w-2/5" alt="">
+                <img src="{{ asset('images/logo-light.svg') }}" class="w-28" alt="">
                 <p class="font-light opacity-70">
                     Opinio is a blog website where people can share their thoughts and ideas
                 </p>
                 <ul class="flex gap-5 items-center">
-                    <li><i class="fa fa-facebook text-xl opacity-70 hover:opacity-100 cursor-pointer"></i></li>
-                    <li><i class="fa fa-twitter text-2xl opacity-70 hover:opacity-100 cursor-pointer"></i></li>
-                    <li><i class="fa fa-instagram text-2xl opacity-70 hover:opacity-100 cursor-pointer"></i></li>
-                    <li><i class="fa fa-linkedin text-2xl opacity-70 hover:opacity-100 cursor-pointer"></i></li>
+                    <li>
+                        <a href="https://www.facebook.com">
+                            <i class="fab fa-facebook-f text-2xl opacity-70 hover:opacity-100 cursor-pointer"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.twitter.com">
+                            <i class="fab fa-twitter text-2xl opacity-70 hover:opacity-100 cursor-pointer"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com">
+                            <i class="fab fa-instagram text-2xl opacity-70 hover:opacity-100 cursor-pointer"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com">
+                            <i class="fab fa-linkedin text-2xl opacity-70 hover:opacity-100 cursor-pointer"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div>
@@ -150,10 +166,10 @@
                 <h4 class="font-bold text-lg mb-4">Contact Us</h4>
                 <ul class="opacity-70 flex flex-col gap-4">
                     <li>
-                        <a href="">cs@opinio.com</a>
+                        <a href="mailto:cs@opinio.com">cs@opinio.com</a>
                     </li>
                     <li>
-                        <a href="">+62 888 111 2222</a>
+                        <p>+62 888 111 2222</p>
                     </li>
                 </ul>
             </div>
@@ -162,7 +178,7 @@
         <div class="flex justify-between">
             <p class="opacity-70">Copyright © 2022 Opinio</p>
             <div class="flex items-center gap-2">
-                <p><b>{{ count($articles) }}</b> articles posted</p>
+                <p><b>{{ $articlesCount }}</b> articles posted</p>
                 <img src="{{ asset('images/small-logo.svg') }}" alt="">
             </div>
         </div>

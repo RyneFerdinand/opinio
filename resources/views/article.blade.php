@@ -4,7 +4,7 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <section class="py-24">
         <div class="font-montserrat mx-auto w-11/12 items-stretch max-w-7xl">
-            <div class="flex flex-col justify-center items-center">
+            <div class="flex flex-col text-center justify-center items-center">
                 <div class="flex flex-row gap-6 mb-8">
                     @foreach ($article->categories as $category)
                         <a href="{{ url('/categories/' . $category->id) }}"
@@ -22,17 +22,41 @@
                     class="object-cover transform w-full h-full hover:scale-105 transition-transform duration-200 ease-in">
             </div>
 
-            <div class="flex flex-row gap-8 items-start mt-16">
+            <div class="flex flex-col lg:flex-row gap-8 items-start mt-16">
                 <div class="flex items-center gap-8 font-poppins w-3/12">
                     <p>
                         4 Minutes Read
                     </p>
-                    <span class="w-12 h-[1px] bg-black"></span>
+                    <span class="w-12 h-[1px] bg-black hidden lg:block"></span>
                 </div>
+
                 <div class="flex flex-col w-full">
                     <p class="font-poppins text-lg">
                         {!! nl2br($article->content) !!}
                     </p>
+                    <div class="lg:hidden flex items-center gap-4 mt-12">
+                        <a href="/user/{{ $article->user_id }}" class="group flex items-center mr-auto gap-4">
+                            <div class="overflow-hidden rounded-full aspect-square">
+                                <img src={{ asset($article->user->profilePicture) }}
+                                    class="w-16 rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
+                            </div>
+                            <p class="font-semibold group-hover:underline">{{ $article->user->name }}</p>
+
+                        </a>
+                        <button onclick="copyURLToClipboard()" type="button"
+                            class="group cursor-pointer hover:bg-dark w-12 aspect-square transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
+                            <i class="fas fa-link group-hover:text-highlight transition-all ease-in duration-75"></i>
+                        </button>
+
+                        <button onclick="toggleLike()" type="button"
+                            class="w-12 aspect-square group cursor-pointer hover:bg-dark transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
+                            <i id="like-filled"
+                                class="fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
+                            <i id="like-not-filled"
+                                class="fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
+                        </button>
+                    </div>
+
                     <div class="flex flex-row gap-4 my-12">
                         <div class="flex gap-2">
                             <p id="like-count" class="text-highlight font-bold">
@@ -49,9 +73,10 @@
                             </p>
                         </div>
                     </div>
+
                     <x-comment-section :article="$article" />
                 </div>
-                <div class="flex flex-col aspect-square items-center gap-4 ml-24 ">
+                <div class="hidden lg:flex flex-col aspect-square items-center gap-4 ml-12 ">
                     <a href="/user/{{ $article->user_id }}" class="overflow-hidden rounded-full">
                         <img src={{ asset($article->user->profilePicture) }}
                             class="w-[80px] rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
@@ -130,7 +155,7 @@
                 @if (count($articles) <= 0)
                     <h1 class="font-bold text-3xl mb-5">No Related Articles</h1>
                 @else
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach ($articles as $article)
                             <x-article-card-large :article="$article"></x-article-card-large>
                         @endforeach

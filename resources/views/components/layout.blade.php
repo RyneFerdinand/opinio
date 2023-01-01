@@ -13,6 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;1,600;1,700&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="{{ asset('/images/icon.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"></script>
@@ -37,6 +38,17 @@
         }
     }
 </script>
+<style>
+    ::-moz-selection {
+        background: #181818;
+        color: #F6961D;
+    }
+
+    ::selection {
+        background: #181818;
+        color: #F6961D;
+    }
+</style>
 <title>Opinio</title>
 </head>
 
@@ -82,17 +94,14 @@
                             </div>
                         </div>
                     @else
-                        <button type="button" class="font-light hover:underline" data-bs-toggle="modal"
-                            data-bs-target="#login">
-                            Login
-                        </button>
-                        <x-modals.login-modal />
+                        <a href="/login" class="font-light hover:underline">Login</a>
                     </li>
                     <li>
-                        <button data-bs-toggle="modal" data-bs-target="#register"
-                            class="font-bold text-white bg-highlight px-6 py-3 rounded-md hover:bg-dark hover:text-highlight transition-all ease-in duration-75">Register
-                        </button>
-                        <x-modals.register-modal />
+                        <a href="/register">
+                            <button
+                                class="font-bold text-white bg-highlight px-6 py-3 rounded-md hover:bg-dark hover:text-highlight transition-all ease-in duration-75">Register
+                            </button>
+                        </a>
                     </li>
                 @endauth
             </ul>

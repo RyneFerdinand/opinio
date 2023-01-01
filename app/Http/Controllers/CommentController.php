@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 class CommentController extends Controller
 {
     //
-    public function store(Request $request, $id){
+    public function store(Request $request, $id)
+    {
         $rules = [
             'comment' => 'required',
         ];
@@ -21,7 +22,7 @@ class CommentController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return back()->withErrors($validator);
         }
 
@@ -33,6 +34,15 @@ class CommentController extends Controller
         $comment->user_id = Auth::user()->id;
         $comment->save();
 
+        return redirect()->back();
+    }
+
+    public function delete(Comment $comment)
+    {
+        if ($comment) {
+            $article_id = $comment->article_id;
+            $comment->delete();
+        }
         return redirect()->back();
     }
 }

@@ -20,6 +20,7 @@ class ArticleFactory extends Factory
         return [
             'user_id' => User::factory(1)->createOne()->id,
             'title' => $this->faker->sentence(),
+            'subtitle' => $this->faker->sentence(),
             'content' => $this->faker->paragraph($nbSentences = 50, $variableNbSentences = true),
             'picture' => "https://picsum.photos/id/$randomId/1080/720",
         ];

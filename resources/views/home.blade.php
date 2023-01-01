@@ -20,7 +20,7 @@
                     <div class=" carousel-item {{ $item++ == 0 ? 'active' : '' }} float-left w-full">
                         <a href="{{ url('/article/' . $article->id) }}" class="w-full">
                             <div
-                                class="absolute h-full w-full z-0 bg-[url({{ asset($article->picture) }})] bg-cover bg-center bg-no-repeat transform group-hover:scale-105 transform transition-transform duration-500">
+                                class="absolute h-full w-full z-0 bg-[url({{ asset($article->picture) }})] bg-cover bg-center bg-no-repeat transform group-hover:scale-105 transform transition-transform duration-200 ease-in">
                             </div>
                             <div class="text-center relative z-1">
                                 <div
@@ -62,7 +62,7 @@
     </div>
 
 
-    <div class="flex flex-row font-montserrat max-w-7xl w-5/6 gap-12 mx-auto my-24">
+    <div class="flex flex-row font-montserrat max-w-screen-2xl w-5/6 gap-12 mx-auto my-24">
         <div class="flex flex-col w-4/6">
             <h1 class="text-black font-bold text-5xl mb-12">Recent Article</h1>
             @foreach ($articles as $article)

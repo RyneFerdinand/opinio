@@ -6,6 +6,8 @@ use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -87,8 +89,8 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->profilePicture = "https://randomuser.me/api/portraits/lego/0.jpg";
-        $user->coverPicture = "https://picsum.photos/id/200/1080/720";
+        $user->coverPicture = "https://randomuser.me/api/portraits/lego/0.jpg";
+        $user->profilePicture = "https://picsum.photos/id/200/1080/720";
 
         $user->password = bcrypt($request->password);
         $user->save();
@@ -117,5 +119,118 @@ class UserController extends Controller
         $users = User::where('name', 'LIKE', "%$query%")->get();
 
         return $users;
+    }
+
+    public function edit()
+    {
+        $user = Auth::user();
+        $articlesCount = count(Article::all());
+
+        return view('profile-edit', compact('user', 'articlesCount'));
+    }
+
+    public function updateCover(Request $request, User $user)
+    {
+        $rules = ([
+            'coverPicture' => 'required|mimes:jpeg,jpg,png',
+        ]);
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return back();
+        }
+
+        if (File::exists(public_path($user->coverPicture))) {
+            File::delete(public_path($user->coverPicture));
+        }
+
+        $ext = $request->file('coverPicture')->extension();
+        $coverPictureExtension = time() . '.' . $ext;
+
+        Storage::putFileAs('/public/images/user/cover/', $request->coverPicture, $coverPictureExtension);
+        $user->coverPicture = '/storage/images/user/cover/' . $coverPictureExtension;
+
+        $user->save();
+
+        return redirect()->back();
+    }
+
+    public function updateProfile(Request $request, User $user)
+    {
+        $rules = ([
+            'profilePicture' => 'required|mimes:jpeg,jpg,png',
+        ]);
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return back();
+        }
+
+        if (File::exists(public_path($user->profilePicture))) {
+            File::delete(public_path($user->profilePicture));
+        }
+
+        $ext = $request->file('profilePicture')->extension();
+        $profilePictureExtension = time() . '.' . $ext;
+
+        Storage::putFileAs('/public/images/user/profile/', $request->profilePicture, $profilePictureExtension);
+        $user->profilePicture = '/storage/images/user/profile/' . $profilePictureExtension;
+
+        $user->save();
+
+        return redirect()->back();
+    }
+
+    public function updatePersonal(Request $request, User $user)
+    {
+        $rules = [
+            'name' => 'required',
+            'email' => 'required',
+        ];
+
+        $messages = ([
+            'email.required' => 'You need to fill your email!',
+            'name.required' => 'You need to fill your name!',
+        ]);
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->with('editSection', 'authentication');
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->about = $request->about;
+        $user->save();
+
+        return redirect("/user/$user->id");
+    }
+
+    public function updateAuthentication(Request $request, User $user)
+    {
+        $rules = [
+            'password' => 'required',
+            'confirmPassword' => 'required|same:password',
+        ];
+
+        $messages = ([
+            'password.required' => 'You need to fill your password!',
+            'confirmPassword.required' => 'You need to fill your confirm password!',
+            'confirmPassword.same' => 'The confirm password field is incorrect!',
+        ]);
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->with('editSection', 'authentication');
+        }
+
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return redirect("/user/$user->id");
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <meta name="_token" content="{{ csrf_token() }}">
     <section class="py-24">
-        <div class="font-montserrat mx-auto w-11/12 items-stretch max-w-7xl">
+        <div class="font-montserrat mx-auto w-5/6 items-stretch max-w-screen-2xl">
             <div class="flex flex-col text-center justify-center items-center">
                 <div class="flex flex-row gap-6 mb-8">
                     @foreach ($article->categories as $category)
@@ -38,7 +38,7 @@
                         <a href="/user/{{ $article->user_id }}" class="group flex items-center mr-auto gap-4">
                             <div class="overflow-hidden rounded-full aspect-square">
                                 <img src={{ asset($article->user->profilePicture) }}
-                                    class="w-16 rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
+                                    class="w-16 aspect-square rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
                             </div>
                             <p class="font-semibold group-hover:underline">{{ $article->user->name }}</p>
 
@@ -79,7 +79,7 @@
                 <div class="hidden lg:flex flex-col aspect-square items-center gap-4 ml-12 ">
                     <a href="/user/{{ $article->user_id }}" class="overflow-hidden rounded-full">
                         <img src={{ asset($article->user->profilePicture) }}
-                            class="w-[80px] rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
+                            class="w-[80px] aspect-square rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
                     </a>
                     <button onclick="copyURLToClipboard()" type="button"
                         class="group cursor-pointer hover:bg-dark w-4/5 aspect-square transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">

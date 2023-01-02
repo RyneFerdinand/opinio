@@ -7,7 +7,7 @@
         </div>
     @endif
     <img src={{ asset($user->profilePicture) }} class="w-[5vw] mt-[-50px] mb-5 rounded-full object-cover">
-    <h1 class="font-bold text-xl mb-1 text-center">{{ $user->name }}</h1>
+    <h1 class="font-bold text-2xl mb-1 text-center">{{ $user->name }}</h1>
     <h3 class="text-l text-dark/[50%] mb-6">{{ count($user->articles) }}
         @if (count($user->articles) <= 1)
             Article

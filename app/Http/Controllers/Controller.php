@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     public function home()
     {
-        $articles = app(ArticleController::class)->getHomeArticles();
+        $articles = Article::all();
         $categories = app(CategoryController::class)->getHomeCategories();
         $users = app(UserController::class)->getHomeUsers();
 

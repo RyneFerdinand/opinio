@@ -10,15 +10,15 @@
                 <div class="flex flex-col gap-2">
                     <label class="font-medium">Email</label>
                     <input type="email" id="email" name="email" placeholder="Email"
-                        class="border-[1px] rounded p-3 border-dark/[0.5]">
+                        class="border-[1px] rounded-md p-3 border-dark/[0.5]">
                     @if ($errors->has('email'))
                         <label class=" text-red-500 text-sm">{{ $errors->first('email') }}</label>
                     @endif
                 </div>
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-2">
                     <label class="font-medium">Password</label>
                     <input type="password" id="password" name="password" placeholder="Password"
-                        class="border-[1px] rounded p-3 border-dark/[0.5]">
+                        class="border-[1px] rounded-md p-3 border-dark/[0.5]">
                     @if ($errors->has('password'))
                         <label class="text-red-500 text-sm">{{ $errors->first('password') }}</label>
                     @endif
@@ -27,7 +27,7 @@
                     <label class="text-red-500 text-sm">{{ $errors->first('error') }}</label>
                 @endif
                 <button
-                    class="mt-4 px-5 py-3 bg-highlight font-bold text-white rounded hover:bg-dark hover:text-highlight transition-all ease-in duration-75">LOGIN</button>
+                    class="mt-4 px-5 py-3 bg-highlight font-bold text-white rounded-md hover:bg-dark hover:text-highlight transition-all ease-in duration-75">LOGIN</button>
             </form>
             <p class="self-start">Don't have an account? <a href="/register"
                     class="hover:underline text-highlight font-bold">Register</a>

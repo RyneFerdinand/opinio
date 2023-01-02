@@ -1,4 +1,4 @@
-@extends('components.layout', ['articles' => ($articles = App\Models\Article::all())])
+@extends('components.layout')
 
 @section('content')
     <section class="font-montserrat mt-20 px-20">

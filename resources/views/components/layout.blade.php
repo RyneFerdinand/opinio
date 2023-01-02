@@ -68,9 +68,6 @@
         <nav class="font-semibold">
             <ul class="flex flex-row items-center gap-10">
                 <li>
-                    <a href="/" class="font-light hover:underline">Home</a>
-                </li>
-                <li>
                     <a href="/" class="font-light hover:underline">Create Article</a>
                 </li>
                 <li>
@@ -81,7 +78,7 @@
                                     <button class="dropdown-toggle flex flex-row items-center" type="button"
                                         id="dropdownfeature" data-bs-toggle="dropdown">
                                         <img src={{ asset(Auth::user()->profilePicture) }}
-                                            class="mr-5 w-[54px] h-[55px] rounded-full">
+                                            class="w-[54px] h-[55px] object-cover rounded-full">
                                     </button>
                                     <div class="dropdown-menu hidden bg-white w-[200px] z-50 pt-2"
                                         aria-labelledby="dropdownfeature">
@@ -115,7 +112,7 @@
     <footer id="footer" class="bg-dark text-white px-12 py-20 font-montserrat">
         <div class="grid lg:grid-cols-4 gap-10 lg:gap-24">
             <div class="flex flex-col gap-4">
-                <img src="{{ asset('images/logo-light.svg') }}" class="w-28" alt="">
+                <img src="{{ asset('images/logo-light.svg') }}" class="w-28 object-cover" alt="">
                 <p class="font-light opacity-70">
                     Opinio is a blog website where people can share their thoughts and ideas
                 </p>

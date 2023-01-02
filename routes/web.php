@@ -24,6 +24,12 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'register']);
 Route::get('/logout', [UserController::class, 'logout']);
 
+Route::patch('/user/{user}/update/authentication', [UserController::class, 'updateAuthentication']);
+Route::patch('/user/{user}/update/personal', [UserController::class, 'updatePersonal']);
+Route::patch('/user/{user}/update/cover', [UserController::class, 'updateCover']);
+Route::patch('/user/{user}/update/profile', [UserController::class, 'updateProfile']);
+Route::get('/user/update', [UserController::class, 'edit']);
+Route::get('/user/edit', [UserController::class, 'edit']);
 Route::get('/user/{id}', [UserController::class, 'profile']);
 Route::get('/people/{query}', [Controller::class, 'viewMorePeople']);
 Route::get('/articles/{query}', [Controller::class, 'viewMoreArticles']);

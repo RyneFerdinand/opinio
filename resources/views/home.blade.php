@@ -16,7 +16,7 @@
             @endphp
 
             <div class="carousel-inner relative w-full overflow-hidden">
-                @foreach ($articles->slice(0, 3) as $article)
+                @foreach ($carouselArticles as $article)
                     <div class=" carousel-item {{ $item++ == 0 ? 'active' : '' }} float-left w-full">
                         <a href="{{ url('/article/' . $article->id) }}" class="w-full">
                             <div
@@ -64,6 +64,7 @@
                 @foreach ($articles as $article)
                     <x-article-card :article="$article"></x-article-card>
                 @endforeach
+                {{ $articles->links() }}
             </div>
             <div class="sticky self-start top-6 hidden xl:flex xl:flex-col gap-12 w-2/6">
                 <div>

@@ -50,10 +50,10 @@
 
                         <button onclick="toggleLike()" type="button"
                             class="w-12 aspect-square group cursor-pointer hover:bg-dark transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
-                            <i id="like-filled"
-                                class="fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
-                            <i id="like-not-filled"
-                                class="fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
+                            <i
+                                class="like-filled fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
+                            <i
+                                class="like-not-filled fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
                         </button>
                     </div>
 
@@ -76,7 +76,7 @@
 
                     <x-comment-section :article="$article" />
                 </div>
-                <div class="hidden lg:flex flex-col aspect-square items-center gap-4 ml-12 ">
+                <div class="hidden lg:flex flex-col sticky top-6 aspect-square items-center gap-4 ml-12 ">
                     <a href="/user/{{ $article->user_id }}" class="overflow-hidden rounded-full">
                         <img src={{ asset($article->user->profilePicture) }}
                             class="w-[80px] aspect-square rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
@@ -88,10 +88,10 @@
 
                     <button onclick="toggleLike()" type="button"
                         class="w-4/5 aspect-square group cursor-pointer hover:bg-dark transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
-                        <i id="like-filled"
-                            class="fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
-                        <i id="like-not-filled"
-                            class="fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
+                        <i
+                            class="like-filled fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
+                        <i
+                            class="like-not-filled fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
                     </button>
                 </div>
             </div>
@@ -102,23 +102,40 @@
                 let csrf = '';
 
                 let filled = null;
-                let notFiled = null;
+                let notFilled = null;
                 let likeCount = null;
 
                 window.onload = () => {
-                    filled = document.getElementById('like-filled');
-                    notFilled = document.getElementById("like-not-filled");
+                    filled = document.querySelectorAll('.like-filled');
+                    notFilled = document.querySelectorAll(".like-not-filled");
+
                     likeCount = document.getElementById("like-count");
                     csrf = document.querySelector('meta[name="_token"]').content;
 
                     if (isLiked) {
-                        filled.classList.remove('hidden');
-                        notFilled.classList.add('hidden');
+                        toggleFill();
                     } else {
-                        filled.classList.add('hidden');
-                        notFilled.classList.remove('hidden');
+                        toggleUnfill();
                     }
 
+                }
+
+                function toggleFill() {
+                    filled.forEach(element => {
+                        element.classList.remove('hidden');
+                    });
+                    notFilled.forEach(element => {
+                        element.classList.add('hidden');
+                    });
+                }
+
+                function toggleUnfill() {
+                    filled.forEach(element => {
+                        element.classList.add('hidden');
+                    });
+                    notFilled.forEach(element => {
+                        element.classList.remove('hidden');
+                    });
                 }
 
                 function copyURLToClipboard() {
@@ -137,12 +154,10 @@
                     isLiked = !isLiked;
 
                     if (isLiked) {
-                        filled.classList.remove('hidden');
-                        notFilled.classList.add('hidden');
+                        toggleFill();
                         currentCount++;
                     } else {
-                        filled.classList.add('hidden');
-                        notFilled.classList.remove('hidden');
+                        toggleUnfill();
                         currentCount--;
                     }
 

@@ -24,7 +24,7 @@
                         @endif
                     </div>
                 @endif
-                <div class="grid grid-cols-5 gap-4 mb-5">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-5">
                     @foreach ($users->slice(0, 5) as $user)
                         <x-author-card-large :user="$user"></x-author-card-large>
                     @endforeach
@@ -51,19 +51,12 @@
                     $ctr = 0;
                 @endphp
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @foreach ($articles as $article)
-                        @php
-                            $ctr++;
-
-                        @endphp
+                    @foreach ($articles->slice(0, 12) as $article)
                         <x-article-card-large :article="$article"></x-article-card-large>
-                        @if ($ctr == 9)
-                        @break
-                    @endif
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
 
-            {{-- <div class="flex flex-row items-center mb-10">
+                {{-- <div class="flex flex-row items-center mb-10">
                 <button data-bs-toggle="modal" data-bs-target="#filter"
                     class="flex flex-row bg-highlight justify-center items-center rounded mr-5">
                     <img class="px-4 py-2 font-bold object-cover" src={{ asset('images/charm_filter.svg') }}>
@@ -106,6 +99,6 @@
                     Review
                 </div>
             </div> --}}
-        </div>
-</section>
+            </div>
+    </section>
 @endsection

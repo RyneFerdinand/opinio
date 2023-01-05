@@ -68,7 +68,7 @@
         <nav class="font-semibold">
             <ul class="flex flex-row items-center gap-10">
                 <li>
-                    <a href="/" class="font-light hover:underline">Create Article</a>
+                    <a href="/create-article" class="font-light hover:underline">Create Article</a>
                 </li>
                 <li>
                     @auth

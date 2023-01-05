@@ -16,13 +16,14 @@ class Controller extends BaseController
 
     public function home()
     {
-        $articles = Article::all();
+        $carouselArticles = Article::all()->take(3);
+        $articles = Article::paginate(15);
         $categories = app(CategoryController::class)->getHomeCategories();
         $users = app(UserController::class)->getHomeUsers();
 
         $articlesCount = count(Article::all());
 
-        return view('home', compact('articles', 'categories', 'users', 'articlesCount'));
+        return view('home', compact('carouselArticles', 'articles', 'categories', 'users', 'articlesCount'));
     }
 
     public function article($id)
@@ -52,7 +53,7 @@ class Controller extends BaseController
         $categories = app(CategoryController::class)->getAllCategories();
 
         $articlesCount = count(Article::all());
-        return view('search', compact('query', 'articles', 'users', 'categories', 'articleCount'));
+        return view('search', compact('query', 'articles', 'users', 'categories', 'articlesCount'));
     }
 
     public function viewMorePeople($query)

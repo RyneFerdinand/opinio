@@ -3,7 +3,7 @@
 @section('content')
     <section class="pt-12 pb-24">
         <div class="flex flex-col gap-8 w-5/6 font-montserrat items-center font-montserrat max-w-screen-2xl mx-auto">
-            <h1 class="font-bold text-4xl mb-4">Edit Profile</h1>
+            <h1 class="font-bold text-4xl mb-4 text-center">Edit Profile</h1>
             <div class="flex flex-col items-center justify-center w-full">
                 <form class="w-full relative" id="cover-picture-form" method="POST" enctype="multipart/form-data"
                     action="/user/{{ $user->id }}/update/cover">
@@ -71,8 +71,7 @@
                     @endif
                 </div>
                 <button
-                    class="px-5 py-3 mt-5 bg-highlight font-bold text-white rounded hover:bg-dark hover:text-highlight transition-all ease-in duration-75"
-                    data-bs-dismiss="modal">UPDATE</button>
+                    class="px-5 py-3 mt-5 bg-highlight font-bold text-white rounded hover:bg-dark hover:text-highlight transition-all ease-in duration-75">UPDATE</button>
             </form>
 
             <form class="max-w-md mx-auto w-full flex-col gap-3 hidden" id="authentication-form" method="POST"

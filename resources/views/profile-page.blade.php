@@ -31,13 +31,13 @@
 
             <div class="flex flex-col mt-16">
                 <h1 class="font-bold text-3xl mb-8">Articles</h1>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     @foreach ($articles as $article)
                         <x-article-card-large :article="$article"></x-article-card-large>
                     @endforeach
                 </div>
+                {{ $articles->links() }}
             </div>
-            {{ $articles->links() }}
         </div>
     </section>
 @endsection

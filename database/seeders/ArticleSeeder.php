@@ -90,5 +90,6 @@ class ArticleSeeder extends Seeder
         ]);
 
         Article::factory(1)->hasComments(3)->create();
+        Article::factory(20)->create();
     }
 }

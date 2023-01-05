@@ -101,7 +101,7 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = User::find($id);
-        $articles = $user->articles()->paginate(9);
+        $articles = $user->articles()->paginate(12);
 
         $articlesCount = count(Article::all());
         return view('profile-page', compact('articles', 'user', 'articlesCount'));

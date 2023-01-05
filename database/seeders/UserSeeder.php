@@ -22,8 +22,5 @@ class UserSeeder extends Seeder
             'coverPicture' => "https://picsum.photos/id/401/1080/720",
             'about' => 'A test user, used to test.'
         ]);
-
-
-        User::factory(3)->create();
     }
 }

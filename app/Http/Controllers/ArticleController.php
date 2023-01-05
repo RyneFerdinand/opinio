@@ -71,8 +71,20 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(12);
         $articlesCount = count($articles);
         return view('articles', compact('articles', 'articlesCount'));
+    }
+
+    public function create()
+    {
+        $articlesCount = count(Article::all());
+        return view('create-edit-article', compact('articlesCount'));
+    }
+
+    public function edit(Article $article)
+    {
+        $articlesCount = count(Article::all());
+        return view('create-edit-article', compact('articlesCount', 'article'));
     }
 }

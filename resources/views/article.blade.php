@@ -3,7 +3,7 @@
 @section('content')
     <meta name="_token" content="{{ csrf_token() }}">
     <section class="py-24">
-        <div class="font-montserrat mx-auto w-5/6 items-stretch max-w-screen-2xl">
+        <div class="font-montserrat mx-auto w-5/6 max-w-screen-2xl">
             <div class="flex flex-col text-center justify-center items-center">
                 <div class="flex flex-row gap-6 mb-8">
                     @foreach ($article->categories as $category)

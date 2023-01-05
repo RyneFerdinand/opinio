@@ -52,7 +52,7 @@ class Controller extends BaseController
         $categories = app(CategoryController::class)->getAllCategories();
 
         $articlesCount = count(Article::all());
-        return view('search', compact('query', 'articles', 'users', 'categories', 'articleCount'));
+        return view('search', compact('query', 'articles', 'users', 'categories', 'articlesCount'));
     }
 
     public function viewMorePeople($query)

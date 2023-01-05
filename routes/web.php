@@ -32,6 +32,8 @@ Route::get('/user/update', [UserController::class, 'edit']);
 Route::get('/user/edit', [UserController::class, 'edit']);
 Route::get('/user/{id}', [UserController::class, 'profile']);
 Route::get('/people/{query}', [Controller::class, 'viewMorePeople']);
+Route::get('/edit-article/{article}', [ArticleController::class, 'edit']);
+Route::get('/create-article', [ArticleController::class, 'create']);
 Route::get('/articles/{query}', [Controller::class, 'viewMoreArticles']);
 
 Route::get('/search', [Controller::class, 'search']);

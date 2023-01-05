@@ -24,7 +24,7 @@
                             </div>
                             <div class="text-center relative z-1">
                                 <div
-                                    class="h-[80vh] flex flex-col justify-center items-center z-2 bg-dark bg-opacity-80 w-full text-center">
+                                    class="h-[85vh] flex flex-col justify-center items-center z-2 bg-dark bg-opacity-80 w-full text-center">
                                     <h1
                                         class="text-highlight text-[4vw] mb-2 font-bold transform hover:scale-[102%] duration-75">
                                         {{ $article->title }}</h1>

@@ -1,13 +1,10 @@
 @props(['user'])
-<a href="{{ url('/user/' . $user->id) }}" class="flex flex-col justify-center items-center bg-white rounded drop-shadow">
-    @if ($user->coverPicture != '')
-        <img src={{ asset($user->coverPicture) }} class="w-[100%] h-[200px] rounded object-cover">
-    @else
-        <div class="w-full h-[200px] rounded bg-dark">
-        </div>
-    @endif
-    <img src={{ asset($user->profilePicture) }} class="w-[5vw] mt-[-50px] mb-5 rounded-full object-cover">
-    <h1 class="font-bold text-2xl mb-1 text-center">{{ $user->name }}</h1>
+<a href="{{ url('/user/' . $user->id) }}"
+    class="flex flex-col justify-center items-center bg-white rounded drop-shadow  transform hover:scale-[101%] transition-transform duration-75">
+    <img src={{ asset($user->coverPicture ? $user->coverPicture : '') }} class="w-full h-48 rounded object-cover">
+    <img src={{ asset($user->profilePicture ? $user->profilePicture : '') }}
+        class="w-20 aspect-square -mt-10 rounded-full object-cover mb-4">
+    <h1 class="font-bold text-xl mb-1 text-center">{{ Str::limit($user->name, 20) }}</h1>
     <h3 class="text-l text-dark/[50%] mb-6">{{ count($user->articles) }}
         @if (count($user->articles) <= 1)
             Article

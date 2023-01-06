@@ -52,23 +52,75 @@
 <title>Opinio</title>
 </head>
 
-<body class="bg-light box-border">
+<body class="bg-light box-border overflow-x-hidden">
     <header id="header" class="flex flex-row font-montserrat items-center justify-between py-8 px-12">
         <a href="/">
-            <img src="{{ asset('images/logo.svg') }}" alt="">
+            <img src="{{ asset('images/logo.svg') }}" alt="" class="min-w-[50px]">
         </a>
-        <form class="bg-white flex flex-row gap-2 px-4 py-1 rounded-md w-1/2" method="GET"
+        <div class="lg:hidden flex flex-col">
+            <button class="relative group" onclick="toggleMobileNavbar()">
+              <div class="relative flex overflow-hidden items-center justify-center rounded-full w-[50px] h-[50px] bg-highlight">
+                <div class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
+                  <div class="bg-white h-[2px] w-7"></div>
+                  <div class="bg-white h-[2px] w-7"></div>
+                  <div class="bg-white h-[2px] w-7"></div>
+                  </div>
+                </div>
+              </div>
+            </button>
+        </div>
+        <div id="mobile-navbar" class="hidden left-0 w-[100vw] h-[100vh] fixed z-50 bg-light text-dark gap-5 top-0">
+            <button type="button" class="text-5xl fixed right-10 top-10" onclick="closeMobileNavbar()">X</button>
+            <nav class="font-semibold flex flex-col w-full">
+                <ul class="flex flex-col items-center gap-8">
+                    <span class="w-full h-[1px] bg-dark"></span>
+                    <li>
+                        <a href="/create-article" class="font-light hover:underline text-center">Create Article</a>
+                    </li>
+                    <span class="w-full h-[1px] bg-dark"></span>
+                    <li>
+                        @auth
+                        <span class="w-full h-[1px] bg-dark"></span>
+                            <div class="flex flex-col justify-center items-center">
+                                <img src={{ asset(Auth::user()->profilePicture) }}
+                                                class="w-[54px] h-[55px] object-cover rounded-full">
+                                <a href="{{ url('/user/' . Auth::user()->id) }}"
+                                    class="px-5 py-2 block w-full">Profile</a>
+                                <a href="{{ url('/logout') }}"
+                                    class="px-5 py-2 block w-full">Logout</a>
+                            </div>
+                        @else
+                            <a href="/login" class="font-light hover:underline">Login</a>
+                            <span class="w-full h-[1px] bg-dark"></span>
+                        </li>
+                        <li>
+                            <a href="/login" class="font-light hover:underline">Register</a>
+                            <span class="w-full h-[1px] bg-dark"></span>
+                        </li>
+                    @endauth
+                </ul>
+            </nav>
+            <form class="bg-white flex-row gap-2 px-4 py-1 rounded-md w-1/2 flex" method="GET"
+            enctype="multipart/form-data" action="{{ url('/search') }}">
+                <input type="text" name="query" id="query" class="bg-transparent w-full outline-none"
+                    placeholder="Search for Articles">
+                <button type="submit">
+                    <i class="fa fa-search text-black p-3 rounded-r-md"></i>
+                </button>
+            </form>
+        </div>
+        <form class="bg-white flex-row gap-2 px-4 py-1 rounded-md w-1/2 hidden lg:flex lg:ml-5 lg:mr-16" method="GET"
             enctype="multipart/form-data" action="{{ url('/search') }}">
             <input type="text" name="query" id="query" class="bg-transparent w-full outline-none"
                 placeholder="Search for Articles">
-            <button typ e="submit">
+            <button type="submit">
                 <i class="fa fa-search text-black p-3 rounded-r-md"></i>
             </button>
         </form>
-        <nav class="font-semibold">
-            <ul class="flex flex-row items-center gap-10">
+        <nav class="font-semibold hidden lg:flex">
+            <ul class="flex flex-row items-center gap-8">
                 <li>
-                    <a href="/create-article" class="font-light hover:underline">Create Article</a>
+                    <a href="/create-article" class="font-light hover:underline text-center">Create Article</a>
                 </li>
                 <li>
                     @auth
@@ -190,4 +242,19 @@
     var heightContent = heightScreen - heightHeader - heightFooter;
 
     document.getElementById('content').style.minHeight = heightContent + "px";
+
+    function toggleMobileNavbar(){
+        let mobileNavbar = document.getElementById('mobile-navbar');
+
+        mobileNavbar.classList.remove('hidden');
+        mobileNavbar.classList.add('flex', 'flex-col', 'justify-center', 'items-center');
+    }
+
+    function closeMobileNavbar(){
+        let mobileNavbar = document.getElementById('mobile-navbar');
+
+        mobileNavbar.classList.add('hidden');
+        mobileNavbar.classList.remove('flex', 'flex-col', 'justify-center', 'items-center');
+    }
+
 </script>

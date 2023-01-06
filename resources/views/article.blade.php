@@ -7,7 +7,7 @@
             <div class="flex flex-col text-center justify-center items-center">
                 <div class="flex flex-row gap-6 mb-8">
                     @foreach ($article->categories as $category)
-                        <a href="{{ url('/categories/' . $category->id) }}"
+                        <a href="{{ url('/category/' . $category->id) }}"
                             class="text-white font-bold px-4 py-2 bg-dark/[.5] rounded hover:bg-highlight transition-all ease-in duration-120">
                             {{ $category->name }}
                         </a>
@@ -25,7 +25,7 @@
             <div class="flex flex-col lg:flex-row gap-8 items-start mt-16">
                 <div class="flex items-center gap-8 font-poppins w-3/12">
                     <p>
-                        4 Minutes Read
+                        {{round(str_word_count($article->content) / 200)}} Minutes Read
                     </p>
                     <span class="w-12 h-[1px] bg-black hidden lg:block"></span>
                 </div>

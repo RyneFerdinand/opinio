@@ -18,6 +18,9 @@
                     <input type="file" accept="image/*" name="coverPicture" id="cover-picture-input" class="hidden"
                         onchange="submitCoverPicture()">
                 </form>
+                @if ($errors->has('coverPicture'))
+                    <label class=" text-red-500 text-sm">{{ $errors->first('coverPicture') }}</label>
+                @endif
                 <form class="relative flex justify-center w-fit mt-[-100px] mb-5" id="profile-picture-form" method="POST"
                     enctype="multipart/form-data" action="/user/{{ $user->id }}/update/profile">
                     @csrf
@@ -29,7 +32,10 @@
                     </button>
                     <input type="file" accept="image/*" name="profilePicture" id="profile-picture-input" class="hidden"
                         onchange="submitProfilePicture()">
-                </form>
+                    </form>
+                @if ($errors->has('profilePicture'))
+                    <label class=" text-red-500 text-sm">{{ $errors->first('profilePicture') }}</label>
+                @endif
                 <div class="flex flex-row justify-center items-center text-xl gap-5 mt-5">
                     <button onclick="toggleEditSection('personal')" type="button" id="personal-button"
                         class="pb-1 border-b-4 hover:opacity-60 border-highlight text-highlight font-bold">
@@ -105,7 +111,7 @@
     </section>
 @endsection
 <script>
-    let editSection = {!! json_encode(session('editSection')) !!} ? 'authentication' : {!! json_encode(session('editSection')) !!};
+    let editSection = {!! json_encode(session('editSection')) !!} ? {!! json_encode(session('editSection')) !!} : 'personal';
 
     let coverPictureForm = null;
     let profilePictureForm = null;

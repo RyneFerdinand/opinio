@@ -29,7 +29,7 @@ class Controller extends BaseController
     public function article($id)
     {
         $article = app(ArticleController::class)->getArticleById($id);
-        // $articles = app(ArticleController::class)->getRelatedArticles($id);
+        $articles = app(ArticleController::class)->getRelatedArticles($id);
         $user = Auth::user();
 
         $isLiked = false;
@@ -37,7 +37,7 @@ class Controller extends BaseController
         foreach ($article->likes as $like) {
             if ($like->user_id == $user->id) $isLiked = true;
         }
-        $articles = Article::all()->take(3);
+        // $articles = Article::all()->take(3);
         $articlesCount = count(Article::all());
 
         return view('article', compact('article', 'articles', 'isLiked', 'articlesCount'));

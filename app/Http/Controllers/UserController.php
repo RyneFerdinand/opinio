@@ -76,8 +76,12 @@ class UserController extends Controller
 
         $messages = ([
             'name.required' => 'You need to fill your name!',
+            'name.min' => 'Your name should be at least 4 characters!',
             'email.required' => 'You need to fill your email!',
+            'email.unique' => 'Your email already exists',
             'password.required' => 'You need to fill your password!',
+            'password.min' => 'Your password should be at least 8 characters!',
+            'password.alpha_num' => 'Your password should be alphanumeric characters!'
         ]);
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -89,8 +93,8 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->coverPicture = "https://randomuser.me/api/portraits/lego/0.jpg";
-        $user->profilePicture = "https://picsum.photos/id/200/1080/720";
+        $user->profilePicture = "https://randomuser.me/api/portraits/lego/0.jpg";
+        $user->coverPicture = "https://picsum.photos/id/200/1080/720";
 
         $user->password = bcrypt($request->password);
         $user->save();
@@ -116,7 +120,7 @@ class UserController extends Controller
 
     public function search($query)
     {
-        $users = User::where('name', 'LIKE', "%$query%")->get();
+        $users = User::where('name', 'LIKE', "%$query%")->paginate(5);
 
         return $users;
     }
@@ -188,17 +192,19 @@ class UserController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required',
+            'about' => 'required'
         ];
 
         $messages = ([
             'email.required' => 'You need to fill your email!',
             'name.required' => 'You need to fill your name!',
+            'about.required' => 'You need to fill your about!'
         ]);
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator)->with('editSection', 'authentication');
+            return back()->withErrors($validator)->with('editSection', 'personal');
         }
 
         $user->name = $request->name;

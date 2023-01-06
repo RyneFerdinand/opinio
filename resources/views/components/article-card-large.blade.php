@@ -12,7 +12,7 @@
             @endif
             <div class="flex flex-row justify-end gap-4">
                 @foreach ($article->categories as $category)
-                    <a href="{{ url('/categories/' . $category->id) }}"
+                    <a href="{{ url('/category/' . $category->id) }}"
                         class="text-white font-semibold text-sm px-2 py-1 z-2 bg-white/[.2] rounded hover:bg-highlight">
                         {{ $category->name }}
                     </a>

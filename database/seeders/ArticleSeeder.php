@@ -38,7 +38,7 @@ class ArticleSeeder extends Seeder
 
             Although introduced as a soft-spoken and kind young woman, Makima is slowly revealed to be Denji's biggest adversary throughout Chainsaw Man. From her suave manipulation tactics and raw power, Makima is a formidable and terrifying antagonist that has easily become one of the greatest shonen villains of all time. Her beauty and subtle methods of control have captivated anime and manga fans, and will likely continue to do so long after Chainsaw Man concludes.
             ",
-            'picture' => "images/articles/makima.jpg",
+            'picture' => "storage/images/articles/makima.jpg",
         ]);
 
         Article::create([
@@ -54,7 +54,7 @@ class ArticleSeeder extends Seeder
             Denji soon becomes wrapped up with Makima, a high-ranking public service Devil Hunter, taking on dangerous jobs to wipe out Devils that threaten the safety of Japan. He quickly becomes acquainted with fellow Devil Hunters, and even Devils themselves, changing his once very simple life forever. In time, Denji begins to discover that all is not quite what it seems.
 
             Chainsaw Man has thus far been collected into eleven volumes, completing the \"Public Safety Arc\". Part 2 of the series, simply titled \"School Arc\" began serializing in July 2022. While little is known about how much the anime will adapt, Chainsaw Man is expected to be divided into two cours, with an estimated twenty-four episodes. This gives studio MAPPA ample opportunity to cover the first 52 chapters, leading to the conclusion of the Bomb Devil Arc Fans of Chainsaw Man are in for a treat with MAPPA producing the anime release, following their phenomenal work on beloved series such as Attack on Titan and Jujutsu Kaisen.",
-            'picture' => "images/articles/chainsawman.png",
+            'picture' => "storage/images/articles/chainsawman.png",
         ]);
 
         Article::create([
@@ -67,7 +67,7 @@ class ArticleSeeder extends Seeder
 
                 This Joker is not inherently provocative. In fact, when we’re introduced to him, Arthur has little insight in how he comes across to others. He’s generally aware that he is odd, but does not quite grasp the degree to which others find him unsettling. Quite the contrary, Arthur dreams of winning the adoration of others by becoming a successful stand-up comedian. He believes his purpose in life is to instill happiness in others—his overactive fantasies depict his mother as his number one support: “you were put on this earth to spread joy and laughter,” he imagines her saying to him adoringly. Arthur fantasizes of being in the spotlight, basking in the glow of show lights, approval, and applause. At times, he even closes his eyes and slowly dances to the sound of imaginary music; picturing himself as the center of attention, a popular figure like the famous talk-show host, Murray Franklin: visible, idolized, and respected. As he pantomimes the scene, Arthur envisions himself as charming, masculine, and dominant. Despite these uplifting dreams, Arthur’s actual life as a loner is monotonous, repetitive, unrewarding, and—much like the landscape of the Gotham City—hopelessly bleak.
             ",
-            'picture' => "images/articles/joker.jpg",
+            'picture' => "storage/images/articles/joker.jpg",
         ]);
 
         Article::create([
@@ -86,7 +86,7 @@ class ArticleSeeder extends Seeder
 
                 China is one of the major market players for video game companies, with Riot benefitting from the game’s 27 servers in China, which has allowed millions of players to access the title. The regulatory change means that players should now be able attain access to their own servers without having to utilize a virtual private network, but this remains in the air. 
             ",
-            'picture' => "images/articles/valorant.jpg",
+            'picture' => "storage/images/articles/valorant.jpg",
         ]);
 
         Article::factory(1)->hasComments(3)->create();

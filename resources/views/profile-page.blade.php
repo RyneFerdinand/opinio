@@ -5,7 +5,7 @@
         <div class="font-montserrat w-5/6 max-w-screen-2xl mx-auto">
             <div class="flex flex-col justify-center items-center">
                 <img src={{ $user->coverPicture }} class="w-full h-[40vh] rounded-md object-cover">
-                <img src={{ $user->profilePicture }} class="w-32 aspect-square mt-[-100px] mb-5 rounded-full object-cover">
+                <img src={{ $user->profilePicture }} class="w-32 aspect-square mt-[-75px] mb-5 rounded-full object-cover">
                 <h1 class="font-bold text-4xl mb-3 text-center">{{ $user->name }}</h1>
                 <h3 class="text-lg text-dark/[50%] mb-3">{{ count($user->articles) }}
                     @if (count($user->articles) <= 1)

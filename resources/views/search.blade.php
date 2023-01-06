@@ -9,52 +9,49 @@
             </div>
             <div class="flex flex-col">
                 @if (count($users) <= 0)
-                    <div class="flex flex-col mb-5">
+                    <div class="flex flex-col">
                         <h1 class="font-bold text-black text-2xl">People</h1>
                         <h1 class="font-bold text-black text-2xl">No People Found</h1>
                     </div>
                 @else
                     <div class="flex flex-row justify-between mb-5">
                         <h1 class="font-bold text-black text-2xl">People</h1>
-                        @if (count($users) > 5)
+                        @if ($users->hasPages())
                             <a href="{{ url('/people/' . $query) }}"
                                 class="font-poppins text-highlight text-xl hover:underline font-semibold">
                                 View More
                             </a>
                         @endif
                     </div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-5">
+                        @foreach ($users->slice(0, 5) as $user)
+                            <x-author-card-large :user="$user"></x-author-card-large>
+                        @endforeach
+                    </div>
                 @endif
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-5">
-                    @foreach ($users->slice(0, 5) as $user)
-                        <x-author-card-large :user="$user"></x-author-card-large>
-                    @endforeach
-                </div>
             </div>
             <div class="flex flex-col">
                 @if (count($articles) <= 0)
-                    <div class="flex flex-col mb-5">
+                    <div class="flex flex-col">
                         <h1 class="font-bold text-black text-2xl">Articles</h1>
                         <h1 class="font-bold text-black text-2xl">No Articles Found</h1>
                     </div>
                 @else
                     <div class="flex flex-row justify-between mb-5">
                         <h1 class="font-bold text-black text-2xl">Articles</h1>
-                        @if (count($articles) > 9)
-                            <a href="{{ url('/articles/' . $query) }}"
+                        @if ($articles->hasPages())
+                            <a href="{{ url('/articles/'.$query) }}"
                                 class="font-poppins text-highlight text-xl hover:underline font-semibold">
                                 View More
                             </a>
                         @endif
                     </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @foreach ($articles->slice(0, 12) as $article)
+                            <x-article-card-large :article="$article"></x-article-card-large>
+                        @endforeach
+                    </div>
                 @endif
-                @php
-                    $ctr = 0;
-                @endphp
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @foreach ($articles->slice(0, 12) as $article)
-                        <x-article-card-large :article="$article"></x-article-card-large>
-                    @endforeach
-                </div>
 
                 {{-- <div class="flex flex-row items-center mb-10">
                 <button data-bs-toggle="modal" data-bs-target="#filter"

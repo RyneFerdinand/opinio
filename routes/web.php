@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LikeController;
@@ -28,12 +29,16 @@ Route::patch('/user/{user}/update/authentication', [UserController::class, 'upda
 Route::patch('/user/{user}/update/personal', [UserController::class, 'updatePersonal']);
 Route::patch('/user/{user}/update/cover', [UserController::class, 'updateCover']);
 Route::patch('/user/{user}/update/profile', [UserController::class, 'updateProfile']);
+Route::patch('/article/{article}/update/picture', [ArticleController::class, 'updatePicture']);
+Route::patch('/article/{article}/update/data', [ArticleController::class, 'updateArticle']);
+
 Route::get('/user/update', [UserController::class, 'edit']);
 Route::get('/user/edit', [UserController::class, 'edit']);
 Route::get('/user/{id}', [UserController::class, 'profile']);
 Route::get('/people/{query}', [Controller::class, 'viewMorePeople']);
 Route::get('/edit-article/{article}', [ArticleController::class, 'edit']);
 Route::get('/create-article', [ArticleController::class, 'create']);
+Route::post('/create-article', [ArticleController::class, 'store']);
 Route::get('/articles/{query}', [Controller::class, 'viewMoreArticles']);
 
 Route::get('/search', [Controller::class, 'search']);
@@ -45,3 +50,5 @@ Route::post('/like/{id}', [LikeController::class, 'toggleLike']);
 
 Route::get('/login', [UserController::class, 'showLogin']);
 Route::get('/register', [UserController::class, 'showRegister']);
+
+Route::get('/category/{category}', [CategoryController::class, 'show']);

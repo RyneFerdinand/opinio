@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $users = User::with('articles')->get()->sortBy(function ($user) {
             return $user->articles->count();
-        })->reverse()->sortBy('name')->take(5);
+        })->reverse()->take(5);
 
         return $users;
     }

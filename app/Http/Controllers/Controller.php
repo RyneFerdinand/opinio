@@ -48,12 +48,39 @@ class Controller extends BaseController
         $query = $request->query('query');
         $filters = $request->query('categories');
 
-        $articles = app(ArticleController::class)->search($query);
-        $users = app(UserController::class)->search($query);
-        $categories = app(CategoryController::class)->getAllCategories();
+        if (!$filters){
+            $articles = app(ArticleController::class)->search($query);
+            $users = app(UserController::class)->search($query);
+            $categories = app(CategoryController::class)->getAllCategories();
 
-        $articlesCount = count(Article::all());
-        return view('search', compact('query', 'articles', 'users', 'categories', 'articlesCount'));
+            $articlesCount = count(Article::all());
+            return view('search', compact('query', 'filters', 'articles', 'users', 'categories', 'articlesCount'));
+        }
+        else {
+            $articles = app(ArticleController::class)->search($query);
+            $article_id = [];
+
+            foreach ($articles as $article) {
+                $ctr = 0;
+                foreach (explode(',', $filters) as $id){
+                    foreach ($article->categories as $category){
+                        if ($category->id == $id){
+                            $ctr++;
+                            break;
+                        }
+                    }
+                }
+                if ($ctr == count(explode(',', $filters))) {
+                    array_push($article_id, $article->id);
+                }
+            }
+            $articles= Article::whereIn('id', $article_id)->paginate(12);
+            $categories = app(CategoryController::class)->getAllCategories();
+
+            $articlesCount = count(Article::all());
+
+            return view('search', compact('query', 'articles', 'filters', 'categories', 'articlesCount'));
+        }
     }
 
     public function viewMorePeople($query)

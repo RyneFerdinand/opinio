@@ -65,7 +65,7 @@
                             <p>Likes</p>
                         </div>
                         <div class="flex gap-2">
-                            <p class="ml-5 text-highlight font-bold">
+                            <p id="comment-count" class="ml-5 text-highlight font-bold">
                                 {{ count($article->comments) }}
                             </p>
                             <p>
@@ -74,9 +74,9 @@
                         </div>
                     </div>
 
-                    <x-comment-section :article="$article" />
+                    <x-comment-section :article="$article"/>
                 </div>
-                <div class="hidden lg:flex flex-col sticky top-6 aspect-square items-center gap-4 ml-12 ">
+                <div class="hidden lg:flex flex-col sticky top-6 aspect-square items-center gap-4 ml-12">
                     <a href="/user/{{ $article->user_id }}" class="overflow-hidden rounded-full">
                         <img src={{ asset($article->user->profilePicture) }}
                             class="w-[80px] aspect-square rounded-full object-cover cursor-pointer transform hover:scale-110 transition-transform ease-in duration-75">
@@ -98,26 +98,109 @@
             <script>
                 let isLiked = {!! json_encode($isLiked) !!};
                 const articleId = {!! json_encode($article->id) !!}
-                let currentCount = {!! json_encode(count($article->likes)) !!}
+                let currentLikesCount = {!! json_encode(count($article->likes)) !!}
                 let csrf = '';
+                let currentCommentsCount = {!! json_encode(count($article->comments)) !!}
+                let user = {!! json_encode(Auth::user()) !!}
+                let comments = {!! json_encode($article->comments) !!}
 
                 let filled = null;
                 let notFilled = null;
                 let likeCount = null;
+                let commentCount = null;
+                let commentBox = null
 
                 window.onload = () => {
                     filled = document.querySelectorAll('.like-filled');
                     notFilled = document.querySelectorAll(".like-not-filled");
 
                     likeCount = document.getElementById("like-count");
+                    commentCount = document.getElementById("comment-count");
                     csrf = document.querySelector('meta[name="_token"]').content;
+                    commentBox = document.getElementById('comment-box');
 
+                    setInterval(updateTime, 1000)
                     if (isLiked) {
                         toggleFill();
                     } else {
                         toggleUnfill();
                     }
 
+                }
+
+                function updateTime(){
+                    comments.forEach(comment => {
+                        let currentDate = new Date().getTime();
+                        let commentDate = new Date(comment.created_at).getTime();
+
+                        let diffInMilisec = currentDate - commentDate;
+
+                        let time = document.getElementById('comment-' + comment.id + '-time');
+
+                        let days = Math.floor(diffInMilisec / 1000 / 60 / (60 * 24));
+
+                        if (days == 0){
+                            let hours = Math.floor(diffInMilisec / 1000 / 60 / 60);
+                            if (hours == 0){
+                                let minutes = Math.floor(diffInMilisec / 1000 / 60);
+                                if (minutes == 0){
+                                    let seconds = Math.floor(diffInMilisec / 1000);
+                                    if (seconds <= 1){
+                                        time.innerHTML = "A Second Ago";
+                                    }
+                                    else {
+                                        time.innerHTML = seconds + " Seconds Ago";
+                                    }
+                                }
+                                else {
+                                    if (minutes <= 1){
+                                        time.innerHTML = "A Minute Ago";
+                                    }
+                                    else {
+                                        time.innerHTML = minutes + " Minutes Ago";
+                                    }
+                                }
+                            }
+                            else {
+                                if (hours <= 1){
+                                    time.innerHTML = "A Hour Ago";
+                                }
+                                else {
+                                    time.innerHTML = hours + " Hours Ago";
+                                }
+                            }
+                        }
+                        else {
+                            if (days <= 30){
+                                if (days <= 1){
+                                    time.innerHTML = "A Day Ago";
+                                }
+                                else {
+                                    time.innerHTML = days + " Days Ago";
+                                }
+                            }
+                            else {
+                                let months = Math.floor(days / 30);
+                                if (months <= 12){
+                                    if (months <= 1){
+                                        time.innerHTML = "A Month Ago";
+                                    }
+                                    else {
+                                        time.innerHTML = months + " Months Ago";
+                                    }
+                                }
+                                else {
+                                    let years = Math.floor(days / 30 / 12);
+                                    if (years <= 1){
+                                        time.innerHTML = "A Year Ago";
+                                    }
+                                    else {
+                                        time.innerHTML = years + " Years Ago";
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
 
                 function toggleFill() {
@@ -155,13 +238,86 @@
 
                     if (isLiked) {
                         toggleFill();
-                        currentCount++;
+                        currentLikesCount++;
                     } else {
                         toggleUnfill();
-                        currentCount--;
+                        currentLikesCount--;
                     }
 
-                    likeCount.innerHTML = currentCount;
+                    likeCount.innerHTML = currentLikesCount;
+                }
+
+                function toggleDeleteComment(commentId){
+                    fetch(`/comment/${commentId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-Token': csrf
+                        }
+                    });
+                    div = document.getElementById('comment-' + commentId);
+                    div.remove();
+
+                    commentCount.innerHTML = --currentCommentsCount;
+                    let index = 0;
+                    comments.forEach(comment => {
+                        if (comment.id == commentId){
+                            comments.splice(index, 1);
+                        }
+                        index++;
+                    });
+                    updateTime;
+                    setInterval(updateTime, 1000);
+                }
+
+                function toggleAddComment(articleId){
+                    let comment = document.getElementById("comment").value;
+
+                    if (comment.length === 0){
+                        document.getElementById('comment-error').innerHTML = "You need to fill the comment!";
+                    }
+                    else {
+                        document.getElementById('comment-error').innerHTML = "";
+                        document.getElementById("comment").value = ""
+                        let data = new FormData();
+                        data.append("comment", comment);
+                        fetch(`/comment/${articleId}`, {
+                            method: 'POST',
+                            body: data,
+                            headers: {
+                                'X-CSRF-Token': csrf
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            comments.push(result);
+                            div = document.createElement("div");
+                            div.id = "comment-" + result.id;
+                            div.classList.add('flex', 'items-start', 'gap-8');
+                            div.innerHTML =
+                            '<img class="rounded-full w-16 aspect-square" src="' + user.profilePicture + '" alt="">' +
+                            '<div class="flex flex-col w-full">' +
+                                '<div class="flex justify-between w-full">' +
+                                    '<div>' +
+                                        '<h4 class="font-bold text-lg">' + user.name + '</h4>' +
+                                        '<p id="comment-' + result.id +'-time" class="font-light opacity-60 font-poppins">' +
+                                            'A Second Ago' +
+                                        '</p>' +
+                                    '</div>' +
+                                    '<button class="group hover:bg-dark py-2 px-3 aspect-square rounded-md cursor-pointer" onclick="toggleDeleteComment(' + result.id + ')">' +
+                                        '<i class="fa fa-trash text-xl group-hover:text-highlight "></i>' +
+                                    '</button>' +
+                                '</div>' +
+                                '<p class="mt-4">' +
+                                    result.content
+                                '</p>' +
+                            '</div>' +
+                            commentBox.prepend(div);
+                        });
+                    }
+                    commentCount.innerHTML = ++currentCommentsCount;
+
+                    updateTime;
+                    setInterval(updateTime, 1000);
                 }
             </script>
 

@@ -40,6 +40,7 @@ Route::get('/edit-article/{article}', [ArticleController::class, 'edit']);
 Route::get('/create-article', [ArticleController::class, 'create']);
 Route::post('/create-article', [ArticleController::class, 'store']);
 Route::get('/articles/{query}', [Controller::class, 'viewMoreArticles']);
+Route::delete('/article/{article}', [ArticleController::class, 'delete']);
 
 Route::get('/search', [Controller::class, 'search']);
 Route::get('/article/{id}', [Controller::class, 'article']);

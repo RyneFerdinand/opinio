@@ -208,4 +208,10 @@ class ArticleController extends Controller
 
         return redirect()->back();
     }
+
+    public function delete(Article $article){
+        $article->delete();
+
+        return;
+    }
 }

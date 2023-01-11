@@ -1,12 +1,11 @@
 @props(['comment'])
-
-<div class="flex items-start gap-8">
+<div class="flex items-start gap-8 comments" id="comment-{{$comment->id}}">
     <img class="rounded-full w-16 aspect-square" src={{ $comment->user->profilePicture }} alt="">
     <div class="flex flex-col w-full">
         <div class="flex justify-between w-full">
             <div>
                 <h4 class="font-bold text-lg">{{ $comment->user->name }}</h4>
-                <p class="font-light opacity-60 font-poppins">
+                <p id="comment-{{$comment->id}}-time" class="font-light opacity-60 font-poppins">
                     @php
                         $now = \Carbon\Carbon::now();
                         $days = $now->diffInDays($comment->created_at);
@@ -23,69 +22,66 @@
                                 @php
                                     $seconds = $now->diffInSeconds($comment->created_at);
                                 @endphp
-                                {{ $seconds }}
-                                @if ($seconds == 1)
-                                    Second Ago
+                                @if ($seconds <= 1)
+                                    A Second Ago
                                 @else
-                                    Seconds Ago
+                                    {{ $seconds }} Seconds Ago
                                 @endif
                             @else
-                                {{ $minutes }}
-                                @if ($minutes == 1)
-                                    Minute Ago
+                                @if ($minutes <= 1)
+                                    A Minute Ago
                                 @else
-                                    Minutes Ago
+                                {{ $minutes }} Minutes Ago
                                 @endif
                             @endif
                         @else
-                            {{ $hours }}
-                            @if ($hours == 1)
-                                Hour Ago
+                            @if ($hours <= 1)
+                                A Hour Ago
                             @else
-                                Hours Ago
+                                {{ $hours }} Hours Ago
                             @endif
                         @endif
                     @else
                         @if ($days <= 30)
-                            {{ $days }}
-                            @if ($days == 1)
-                                Day Ago
+                            @if ($days <= 1)
+                                A Day Ago
                             @else
-                                Days Ago
+                            {{ $days }} Days Ago
                             @endif
                         @else
                             @php
                                 $months = (int) ($days / 30);
                             @endphp
                             @if ($months <= 12)
-                                {{ $months }}
-                                @if ($months == 1)
-                                    Month Ago
+                                @if ($months <= 1)
+                                    A Month Ago
                                 @else
-                                    Months Ago
+                                {{ $months }} Months Ago
                                 @endif
                             @else
-                                {{ (int) ($months / 12) }}
-                                @if ($months / 12 == 1)
-                                    Year Ago
+                                @if ((int) ($months / 12) <= 1)
+                                    A Year Ago
                                 @else
-                                    Years Ago
+                                    {{ (int) ($months / 12) }}Years Ago
                                 @endif
                             @endif
                         @endif
                     @endif
                 </p>
             </div>
-            <form action="/comment/{{ $comment->id }}" method="POST" class="p-4">
-                @csrf
-                @method('delete')
-                <button class="group hover:bg-dark py-2 px-3 aspect-square rounded-md cursor-pointer">
-                    <i class="fa fa-trash text-xl group-hover:text-highlight "></i>
-                </button>
-            </form>
+            {{-- <form action="/comment/{{ $comment->id }}" method="POST" class="p-4"> --}}
+                {{-- @csrf --}}
+                {{-- @method('delete') --}}
+                @if (Auth::user()->id == $comment->user->id)
+                    <button class="group hover:bg-dark py-2 px-3 aspect-square rounded-md cursor-pointer" onclick="toggleDeleteComment({{$comment->id}})">
+                        <i class="fa fa-trash text-xl group-hover:text-highlight "></i>
+                    </button>
+                @endif
+            {{-- </form> --}}
         </div>
         <p class="mt-4">
             {{ $comment->content }}
         </p>
     </div>
 </div>
+

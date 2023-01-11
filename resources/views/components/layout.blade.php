@@ -73,13 +73,13 @@
             <button type="button" class="text-5xl fixed right-10 top-10" onclick="closeMobileNavbar()">X</button>
             <nav class="font-semibold flex flex-col w-full">
                 <ul class="flex flex-col items-center gap-8">
+                    @auth
                     <span class="w-full h-[1px] bg-dark"></span>
                     <li>
                         <a href="/create-article" class="font-light hover:underline text-center">Create Article</a>
                     </li>
                     <span class="w-full h-[1px] bg-dark"></span>
                     <li>
-                        @auth
                         <span class="w-full h-[1px] bg-dark"></span>
                             <div class="flex flex-col justify-center items-center">
                                 <img src={{ asset(Auth::user()->profilePicture) }}
@@ -119,11 +119,11 @@
         </form>
         <nav class="font-semibold hidden lg:flex">
             <ul class="flex flex-row items-center gap-8">
-                <li>
-                    <a href="/create-article" class="font-light hover:underline text-center">Create Article</a>
-                </li>
-                <li>
-                    @auth
+                @auth
+                    <li>
+                        <a href="/create-article" class="font-light hover:underline text-center">Create Article</a>
+                    </li>
+                    <li>
                         <div class="flex justify-center">
                             <div>
                                 <div class="dropdown relative">
@@ -142,8 +142,8 @@
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <a href="/login" class="font-light hover:underline">Login</a>
+                @else
+                    <a href="/login" class="font-light hover:underline">Login</a>
                     </li>
                     <li>
                         <a href="/register">

@@ -19,37 +19,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Controller::class, 'home']);
-
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register', [UserController::class, 'register']);
-Route::get('/logout', [UserController::class, 'logout']);
-
-Route::patch('/user/{user}/update/authentication', [UserController::class, 'updateAuthentication']);
-Route::patch('/user/{user}/update/personal', [UserController::class, 'updatePersonal']);
-Route::patch('/user/{user}/update/cover', [UserController::class, 'updateCover']);
-Route::patch('/user/{user}/update/profile', [UserController::class, 'updateProfile']);
-Route::patch('/article/{article}/update/picture', [ArticleController::class, 'updatePicture']);
-Route::patch('/article/{article}/update/data', [ArticleController::class, 'updateArticle']);
-
-Route::get('/user/update', [UserController::class, 'edit']);
-Route::get('/user/edit', [UserController::class, 'edit']);
-Route::get('/user/{id}', [UserController::class, 'profile']);
-Route::get('/people/{query}', [Controller::class, 'viewMorePeople']);
-Route::get('/edit-article/{article}', [ArticleController::class, 'edit']);
-Route::get('/create-article', [ArticleController::class, 'create']);
-Route::post('/create-article', [ArticleController::class, 'store']);
-Route::get('/articles/{query}', [Controller::class, 'viewMoreArticles']);
-Route::delete('/article/{article}', [ArticleController::class, 'delete']);
-
-Route::get('/search', [Controller::class, 'search']);
-Route::get('/article/{id}', [Controller::class, 'article']);
-Route::post('/comment/{id}', [CommentController::class, 'store']);
-Route::delete('/comment/{comment}', [CommentController::class, 'delete']);
-
-Route::post('/like/{id}', [LikeController::class, 'toggleLike']);
-
-Route::get('/login', [UserController::class, 'showLogin']);
-Route::get('/register', [UserController::class, 'showRegister']);
+Route::controller(Controller::class)->group(function (){
+    Route::get('/', 'home');
+    Route::get('/people/{query}', 'viewMorePeople');
+    Route::get('/articles/{query}', 'viewMoreArticles');
+    Route::get('/search', 'search');
+    Route::get('/article/{id}', 'article');
+});
 
 Route::get('/category/{category}', [CategoryController::class, 'show']);
+
+Route::middleware(['userSecurity'])->group(function () {
+    Route::controller(UserController::class)->group(function (){
+        Route::patch('/user/{user}/update/authentication', 'updateAuthentication');
+        Route::patch('/user/{user}/update/personal', 'updatePersonal');
+        Route::patch('/user/{user}/update/cover', 'updateCover');
+        Route::patch('/user/{user}/update/profile', 'updateProfile');
+
+        Route::get('/logout', 'logout');
+        Route::get('/user/update', 'edit');
+        Route::get('/user/edit', 'edit');
+    });
+
+    Route::controller(ArticleController::class)->group(function (){
+        Route::patch('/article/{article}/update/picture', 'updatePicture');
+        Route::patch('/article/{article}/update/data', 'updateArticle');
+
+        Route::get('/edit-article/{article}', 'edit');
+        Route::get('/create-article', 'create');
+
+        Route::post('/create-article', 'store');
+
+        Route::delete('/article/{article}', 'delete');
+    });
+
+    Route::post('/comment/{id}', [CommentController::class, 'store']);
+
+    Route::delete('/comment/{comment}', [CommentController::class, 'delete']);
+
+    Route::post('/like/{id}', [LikeController::class, 'toggleLike']);
+});
+
+Route::get('/user/{id}', [UserController::class, 'profile']);
+
+Route::middleware(['guestSecurity'])->group(function(){
+    Route::controller(UserController::class)->group(function (){
+        Route::post('/login', 'login');
+        Route::post('/register', 'register');
+        Route::get('/login', 'showLogin');
+        Route::get('/register', 'showRegister');
+    });
+});

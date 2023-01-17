@@ -32,18 +32,12 @@
 
             <div class="flex flex-col mt-16">
                 <h1 class="font-bold text-3xl">Articles</h1>
-                @if (count($articles) <= 0)
-                    <div class="text-3xl font-bold">
-                        No Articles
-                    </div>
-                @else
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
-                        @foreach ($articles as $article)
-                            <x-article-card-large :article="$article"></x-article-card-large>
-                        @endforeach
-                    </div>
-                    {{ $articles->links() }}
-                @endif
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+                    @foreach ($articles as $article)
+                        <x-article-card-large :article="$article"></x-article-card-large>
+                    @endforeach
+                </div>
+                {{ $articles->links() }}
             </div>
         </div>
     </section>

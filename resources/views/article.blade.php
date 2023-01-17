@@ -48,13 +48,15 @@
                             <i class="fas fa-link group-hover:text-highlight transition-all ease-in duration-75"></i>
                         </button>
 
-                        <button onclick="toggleLike()" type="button"
-                            class="w-12 aspect-square group cursor-pointer hover:bg-dark transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
-                            <i
-                                class="like-filled fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
-                            <i
-                                class="like-not-filled fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
-                        </button>
+                        @auth
+                            <button onclick="toggleLike()" type="button"
+                                class="w-4/5 aspect-square group cursor-pointer hover:bg-dark transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
+                                <i
+                                    class="like-filled fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
+                                <i
+                                    class="like-not-filled fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
+                            </button>
+                        @endauth
                     </div>
 
                     <div class="flex flex-row gap-4 my-12">
@@ -85,14 +87,15 @@
                         class="group cursor-pointer hover:bg-dark w-4/5 aspect-square transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
                         <i class="fas fa-link group-hover:text-highlight transition-all ease-in duration-75"></i>
                     </button>
-
-                    <button onclick="toggleLike()" type="button"
-                        class="w-4/5 aspect-square group cursor-pointer hover:bg-dark transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
-                        <i
-                            class="like-filled fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
-                        <i
-                            class="like-not-filled fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
-                    </button>
+                    @auth
+                        <button onclick="toggleLike()" type="button"
+                            class="w-4/5 aspect-square group cursor-pointer hover:bg-dark transition-all ease-in duration-75 bg-white rounded-md flex items-center justify-center">
+                            <i
+                                class="like-filled fas fa-heart group-hover:text-highlight transition-all ease-in duration-75 hidden"></i>
+                            <i
+                                class="like-not-filled fa-regular fa-heart group-hover:text-highlight transition-all ease-in duration-75"></i>
+                        </button>
+                    @endauth
                 </div>
             </div>
             <script>
@@ -323,15 +326,11 @@
 
             <div class="flex flex-col w-full mt-24">
                 <h1 class="font-bold text-3xl mb-5">Related Articles</h1>
-                @if (count($articles) <= 0)
-                    <h1 class="font-bold text-3xl mb-5">No Related Articles</h1>
-                @else
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        @foreach ($articles as $article)
-                            <x-article-card-large :article="$article"></x-article-card-large>
-                        @endforeach
-                    </div>
-                @endif
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach ($articles as $article)
+                        <x-article-card-large :article="$article"></x-article-card-large>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>

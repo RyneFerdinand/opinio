@@ -12,8 +12,6 @@ class LikeController extends Controller
 
     public function toggleLike($id)
     {
-        if (!Auth::user()) return redirect()->back();
-
         $like = Like::where('user_id', Auth::user()->id)
             ->where('article_id', $id)
             ->first();

@@ -12,21 +12,21 @@ class CommentController extends Controller
     //
     public function store(Request $request, $article_id)
     {
-        // $rules = [
-        //     'comment' => 'required',
-        // ];
+        $rules = [
+            'comment' => 'required',
+        ];
 
-        // $messages = ([
-        //     'comment.required' => 'You need to fill the comment!',
-        // ]);
+        $messages = ([
+            'comment.required' => 'You need to fill the comment!',
+        ]);
 
-        // $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator);
-        // }
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
-        // $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules, $messages);
 
         $comment = new Comment();
         $comment->content = $request->comment;

@@ -7,15 +7,15 @@
             <form class="flex flex-col items-stretch self-stretch gap-4" method="POST" action="{{url('/create-article')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="relative w-full h-[80vh] rounded-md overflow-hidden">
-                    <img src={{ asset('https://picsum.photos/id/1/1080/720') }}
-                        class="object-cover w-full h-full ">
+                    <img src={{ asset('https://lyon.palmaresdudroit.fr/images/joomlart/demo/default.jpg') }}
+                        class="object-cover w-full h-full" id="cover-image">
                     <button type="button" onclick="togglePicture()"
                         class="opacity-0 hover:opacity-100 text-white gap-4 text-opacity-80 w-full h-full rounded-md bg-dark bg-opacity-40 absolute inset-0 flex items-center justify-center transition-opacity ease-in duration-75">
                         <i class="fas fa-edit text-6xl"></i>
                         <p class="text-4xl">Add Picture</p>
                     </button>
                     <input type="file" accept="image/*" name="picture" id="picture-input" class="hidden"
-                        onchange="submitPicture()">
+                        onchange="displayPicture()">
                 </div>
                 @if ($errors->has('picture'))
                     <label class=" text-red-500 text-sm">{{ $errors->first('picture') }}</label>
@@ -107,4 +107,12 @@
         let pictureInput = document.getElementById('picture-input');
         pictureInput.click();
     }
+
+    function displayPicture() {
+        let pictureInput = document.getElementById('picture-input');
+        let coverImage = document.getElementById('cover-image');
+
+        coverImage.src = URL.createObjectURL(pictureInput.files[0]);
+    }
+
 </script>

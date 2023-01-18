@@ -62,7 +62,7 @@ class ArticleController extends Controller
             }
         }
         $articles = Article::find($article_id);
-        return $articles;
+        return $articles->slice(1, 3);
     }
 
     public function search($query)
@@ -94,7 +94,8 @@ class ArticleController extends Controller
         return view('edit-article', compact('articlesCount', 'article', 'categories'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $rules = [
             'picture' => 'required|mimes:jpg,jpeg,png',
             'title' => 'required|min:5',
@@ -134,14 +135,14 @@ class ArticleController extends Controller
 
         $article->save();
 
-        foreach (explode(',', $request->categories) as $category){
+        foreach (explode(',', $request->categories) as $category) {
             DB::table('article_categories')->insert(['article_id' => $article->id, 'category_id' => $category]);
         }
-
-        return redirect()->back();
+        return redirect("/article/$article->id");
     }
 
-    public function updatePicture(Request $request, Article $article){
+    public function updatePicture(Request $request, Article $article)
+    {
         $rules = ([
             'picture' => 'required|mimes:jpeg,jpg,png',
         ]);
@@ -172,7 +173,8 @@ class ArticleController extends Controller
         return redirect()->back();
     }
 
-    public function updateArticle(Request $request, Article $article){
+    public function updateArticle(Request $request, Article $article)
+    {
         $rules = [
             'title' => 'required|min:5',
             'subtitle' => 'required',
@@ -202,14 +204,15 @@ class ArticleController extends Controller
         $article->save();
 
         DB::table('article_categories')->where('article_id', $article->id)->delete();
-        foreach (explode(',', $request->categories) as $category){
+        foreach (explode(',', $request->categories) as $category) {
             DB::table('article_categories')->insert(['article_id' => $article->id, 'category_id' => $category]);
         }
 
-        return redirect()->back();
+        return redirect("/article/$article->id");
     }
 
-    public function delete(Article $article){
+    public function delete(Article $article)
+    {
         $article->delete();
 
         return;

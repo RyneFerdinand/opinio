@@ -37,7 +37,9 @@ class Controller extends BaseController
         foreach ($article->likes as $like) {
             if ($like->user_id == $user->id) $isLiked = true;
         }
-        // $articles = Article::all()->take(3);
+        if (count($articles) == 0) {
+            $articles = Article::all()->take(3);
+        }
         $articlesCount = count(Article::all());
 
         return view('article', compact('article', 'articles', 'isLiked', 'articlesCount'));
@@ -48,23 +50,22 @@ class Controller extends BaseController
         $query = $request->query('query');
         $filters = $request->query('categories');
 
-        if (!$filters){
+        if (!$filters) {
             $articles = app(ArticleController::class)->search($query);
             $users = app(UserController::class)->search($query);
             $categories = app(CategoryController::class)->getAllCategories();
 
             $articlesCount = count(Article::all());
             return view('search', compact('query', 'filters', 'articles', 'users', 'categories', 'articlesCount'));
-        }
-        else {
+        } else {
             $articles = app(ArticleController::class)->search($query);
             $article_id = [];
 
             foreach ($articles as $article) {
                 $ctr = 0;
-                foreach (explode(',', $filters) as $id){
-                    foreach ($article->categories as $category){
-                        if ($category->id == $id){
+                foreach (explode(',', $filters) as $id) {
+                    foreach ($article->categories as $category) {
+                        if ($category->id == $id) {
                             $ctr++;
                             break;
                         }
@@ -74,7 +75,7 @@ class Controller extends BaseController
                     array_push($article_id, $article->id);
                 }
             }
-            $articles= Article::whereIn('id', $article_id)->paginate(12);
+            $articles = Article::whereIn('id', $article_id)->paginate(12);
             $categories = app(CategoryController::class)->getAllCategories();
 
             $articlesCount = count(Article::all());
